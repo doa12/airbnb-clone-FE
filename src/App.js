@@ -6,6 +6,7 @@ import styled, { ThemeProvider} from 'styled-components';
 import GlobalStyle from './style/GlobalStyle';
 import Home from './pages/Home';
 import MainHeader from './components/header/MainHeader';
+import SubHeader from './components/header/SubHeader';
 import theme from './style/theme';
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
     <div className="App">
       <GlobalStyle />
       <MainHeader/>
+      <SubHeader/>
       <Content>
         <Routes>
           <Route path='/' element={<Home/>}/>
@@ -30,7 +32,7 @@ const Content = styled.div`
   width:90%;
   /* background:yellow; */
   margin: 0 auto;
-  padding-top:80px;
+  padding-top:170px;
 `
 
 

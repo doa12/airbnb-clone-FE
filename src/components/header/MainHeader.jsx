@@ -39,6 +39,8 @@ const MainHeaderWrapper = styled.div`
     top:0;
     left:0;
     width:100%;
+    background:white;
+    z-index:100;
     /* background:green; */
     height:80px;
     border-bottom:1px solid lightgray;
@@ -66,6 +68,7 @@ const HeaderLogoArea = styled.div`
     height:100%;
     display:none;
     align-items:center;
+    cursor:pointer;
     color:${({ theme }) => theme.colors.airbnb_red};
     font-weight: bold;
     font-size:25px;
