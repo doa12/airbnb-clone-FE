@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PersonalButtons from './PersonalButtons';
 
 const MainHeader = () => {
 
@@ -23,7 +24,7 @@ const MainHeader = () => {
                     </HeaderSearchArea>
                     <HeaderActionsArea>
                         <p>호스트 되기</p>
-                        <p>마이페이지</p>
+                        <PersonalButtons/>
                     </HeaderActionsArea>
                     
                 </MainHeaderContent>

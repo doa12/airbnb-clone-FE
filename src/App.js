@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { userActions } from './redux/modules/userSlice';
@@ -8,13 +8,16 @@ import Home from './pages/Home';
 import MainHeader from './components/header/MainHeader';
 import SubHeader from './components/header/SubHeader';
 import theme from './style/theme';
+import Filter from './pages/Filter';
 const App = () => {
+  const [isFilter, setIsFilter] = useState(false);
   return (
     <ThemeProvider theme={theme}>
     <div className="App">
       <GlobalStyle />
       <MainHeader/>
-      <SubHeader/>
+      <SubHeader setIsFilter={setIsFilter}/>
+      {isFilter?<Filter setIsFilter={setIsFilter}/>:null}
       <Content>
         <Routes>
           <Route path='/' element={<Home/>}/>
