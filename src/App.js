@@ -1,47 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
 import React, { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { userActions } from './redux/modules/userSlice';
 import styled from 'styled-components';
+import GlobalStyle from './style/GlobalStyle';
 
-function App() {
-  const tempState = useSelector(state => state.user.isAppend);
-  const dispatch = useDispatch();
-  console.log(tempState);
-
-  const tempclickhandler = () => {
-    dispatch(userActions.toggleIsAppend());
-  }
-
-  useEffect(()=> {
-    console.log(tempState);
-  }, [tempState])
-
+const App = () => {
   return (
     <div className="App">
-      <button onClick={tempclickhandler}>toggle</button>
-      <TempDiv>
-        <TemptempDiv isShow={tempState === true? true:false}></TemptempDiv>
-      </TempDiv>
+      <GlobalStyle />
+      <Header/>
+      <Content>
+        dddddfdsafd
+      </Content>
     </div>
   );
 }
 
 export default App;
 
-const TempDiv = styled.div`
-  display:${props=>props.isShow === true ? 'flex':'none'};
-  justify-content:center;
-  align-items:center;
-  width:100vw;
-  height:100vh;
-  color:blue;
+
+const Content = styled.div`
+  width:90%;
   background:yellow;
+  margin: 0 auto;
+  padding-top:80px;
 `
 
-const TemptempDiv = styled.div`
-  width:300px;
-  height:500px;
-  background:white;
+const Header = styled.div`
+  position:fixed;
+  width:100%;
+  top:0;
+  left:0;
+  height:70px;
+  background:green;
 `
+
+
