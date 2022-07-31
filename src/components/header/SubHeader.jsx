@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import { FaAirbnb } from 'react-icons/fa';
 import { MdApartment } from 'react-icons/md';
 import { HiOfficeBuilding } from 'react-icons/hi';
@@ -7,7 +8,8 @@ import { BsHouseFill, BsFilterRight } from 'react-icons/bs';
 
 
 const SubHeader = ({ setIsFilter }) => {
-    
+    let location = useLocation();
+    if(location.pathname !== '/') return null;
     return(
         <SubHeaderWrapper>
             <SubHeaderContent>

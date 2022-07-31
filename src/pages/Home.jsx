@@ -23,6 +23,7 @@ const HomeContainer = styled.div`
     gap:10px;
     flex-wrap:wrap;
     width:100%;
+    padding-top:85px;
     @media screen and (min-width:550px) {
         gap:20px;
     }

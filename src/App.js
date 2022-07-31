@@ -37,7 +37,7 @@ const Content = styled.div`
   width:90%;
   /* background:yellow; */
   margin: 0 auto;
-  padding-top:170px;
+  padding-top:85px;
 `
 
 
