@@ -12,19 +12,19 @@ const SubHeader = ({ setIsFilter }) => {
         <SubHeaderWrapper>
             <SubHeaderContent>
                 <SubHeaderOption>
-                    <OptionDiv>
+                    <OptionDiv data-name='all'>
                         <p className='subheader-icon'><FaAirbnb></FaAirbnb></p>
                         <p className='subheader-desc'>all</p>
                     </OptionDiv>
-                    <OptionDiv>
+                    <OptionDiv data-name='apartment'>
                         <p className='subheader-icon'><MdApartment/></p>
                         <p className='subheader-desc'>apartment</p>
                     </OptionDiv>
-                    <OptionDiv>
+                    <OptionDiv data-name='offistel'>
                         <p className='subheader-icon'><HiOfficeBuilding/></p>
                         <p className='subheader-desc'>offistel</p>
                     </OptionDiv>
-                    <OptionDiv>
+                    <OptionDiv data-name='house'>
                         <p className='subheader-icon'><BsHouseFill/></p>
                         <p className='subheader-desc'>house</p>
                     </OptionDiv>

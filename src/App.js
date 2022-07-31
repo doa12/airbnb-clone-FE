@@ -9,6 +9,7 @@ import MainHeader from './components/header/MainHeader';
 import SubHeader from './components/header/SubHeader';
 import theme from './style/theme';
 import Filter from './pages/Filter';
+import Detail from './pages/Detail';
 const App = () => {
   const [isFilter, setIsFilter] = useState(false);
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Content>
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path='/detail/:id' element={<Detail/>}></Route>
         </Routes>
       </Content>
     </div>
