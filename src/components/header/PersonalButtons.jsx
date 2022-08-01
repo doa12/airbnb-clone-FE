@@ -1,14 +1,13 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Stack from '@mui/material/Stack';
+import { Grow, Paper, Popper,
+  MenuItem, MenuList, Stack } from '@mui/material';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
+import Signup from '../modal/Signup';
+import Login from '../modal/Login';
+import Logout from '../modal/Logout';
 
 const PersonalButtons = () => {
   const [open, setOpen] = React.useState(false);
@@ -55,9 +54,8 @@ const PersonalButtons = () => {
           aria-expanded={open ? 'true' : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
-          
         >
-          <FaUserCircle/>
+          <FaUserCircle fontSize={23}/>
         </Button>
         
         <Popper
@@ -86,11 +84,11 @@ const PersonalButtons = () => {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={handleClose}>회원가입</MenuItem>
-                    <MenuItem onClick={handleClose}>로그인</MenuItem>
+                    <MenuItem><Signup/></MenuItem>
+                    <MenuItem><Login/></MenuItem>
                     <MenuItem onClick={handleClose}>위시리스트</MenuItem>
                     <MenuItem onClick={handleClose}>예약현황</MenuItem>
-                    <MenuItem onClick={handleClose}>로그아웃</MenuItem>
+                    <MenuItem><Logout/></MenuItem>
                     
                   </MenuList>
                 </ClickAwayListener>
