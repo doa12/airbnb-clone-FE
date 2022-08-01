@@ -12,7 +12,7 @@ const device = {
     blue: "#0984e3",
     white: "#FFFFFF",
     black: "000000",
-    airbnb_red:"rgb(255,65,94)"
+    airbnb_red:"#ff415e"
   };
 
   const theme = {

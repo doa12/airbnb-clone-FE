@@ -1,15 +1,17 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import { Grow, Paper, Popper,
+import { useNavigate } from 'react-router-dom';
+import { Button, ClickAwayListener, Grow, Paper, Popper,
   MenuItem, MenuList, Stack } from '@mui/material';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import Signup from '../modal/Signup';
 import Login from '../modal/Login';
 import Logout from '../modal/Logout';
+import WishList from '../../pages/WishList'
 
 const PersonalButtons = () => {
+  const navigate = useNavigate();
+
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -86,7 +88,12 @@ const PersonalButtons = () => {
                   >
                     <MenuItem><Signup/></MenuItem>
                     <MenuItem><Login/></MenuItem>
-                    <MenuItem onClick={handleClose}>위시리스트</MenuItem>
+                    <MenuItem onClick={()=>{
+                      navigate.push(
+                        '/api/mypage/wishlist?&page=0부터시작&size=20&sort=createdAt,DESC'
+                        )
+                      }}>위시리스트
+                    </MenuItem>
                     <MenuItem onClick={handleClose}>예약현황</MenuItem>
                     <MenuItem><Logout/></MenuItem>
                     

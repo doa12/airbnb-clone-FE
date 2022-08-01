@@ -133,6 +133,7 @@ function BeHost() {
   return (
     <>
       <Wrap>
+      {/* <MdSupervisedUserCircle color='#ff415e' fontSize={25}/> */}
       <MdSupervisedUserCircle fontSize={25}/>
       <P onClick={handleOpen}>호스트 되기</P>
       </Wrap>
@@ -269,6 +270,7 @@ flex-direction : row;
 padding : 7px 10px;
 :hover{
   background-color : #f7f7f7;
+  // background-color : #FFFAFF;
   border-radius : 5px;
 }
 `
