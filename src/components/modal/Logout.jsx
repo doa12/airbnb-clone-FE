@@ -25,39 +25,18 @@ function Login() {
   // P의 padding 탓은 아닌 것을 확인했습니다.
   return (
     <>
-    <P onClick={handleOpen}>로그인</P>
+    <P onClick={handleOpen}>로그아웃</P>
       <Dialog open={open} onClose={handleClose}>
-          <PP>로그인</PP>
+          <PP>로그아웃</PP>
           <hr/>
         <DialogTitle fontFamily={"Md"} fontSize={20} fontWeight={"bolder"}>
-          에어비앤비에 오신 것을 환영합니다.
-        </DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            fontWeight="bolder"
-            margin="dense"
-            label="User Name"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-            <TextField
-            autoFocus
-            fontWeight="bolder"
-            margin="dense"
-            label="Password"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          <Br/>
-        </DialogContent>
+          로그아웃하시겠습니까?
+        </DialogTitle>          
         <DialogActions>        
           <Button onClick={handleClose}>취소</Button>
           <Button onClick={
             () => {
-                navigate.push("/login");
+                navigate.push("/");
             }}>완료</Button>
         </DialogActions>
       </Dialog>
