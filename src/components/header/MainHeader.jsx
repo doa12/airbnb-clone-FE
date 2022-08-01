@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 import PersonalButtons from './PersonalButtons';
+import BeHost from '../modal/BeHost';
 
 const MainHeader = () => {
 
@@ -27,7 +28,7 @@ const MainHeader = () => {
                         </HeaderInput>
                     </HeaderSearchArea>
                     <HeaderActionsArea>
-                        <p>호스트 되기</p>
+                        <BeHost/>
                         <PersonalButtons/>
                     </HeaderActionsArea>
                     
