@@ -1,15 +1,120 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux"
 import { Dialog, DialogTitle, DialogActions,
 DialogContent, DialogContentText, 
 Box, Button, TextField, Checkbox, Slider,
-FormGroup, FormControlLabel } from '@mui/material';
+FormGroup, FormControl, FormControlLabel } from '@mui/material';
 import { MdSupervisedUserCircle } from 'react-icons/md';
 
 
 function BeHost() {
+  // 여기서부터 추가된 코드입니다.
+  const [RoomType, setRoomType] = useState("");
+  const [RoomName, setRoomName] = useState("");
+  const [RoomAddress, setRoomAddress] = useState("");
+  const [DateFrom, setDateFrom] = useState("");
+  const [DateUpto, setDateUpto] = useState("");
+  const [MaxGuest, setMaxGuest] = useState("");
+  const [Parking, setParking] = useState("");
+  const [Kitchen, setKitchen] = useState("");
+  const [Wifi, setWifi] = useState("");
+  const [Aircon, setAircon] = useState("");
+  const [Washer, setWasher] = useState("");
+  const [TV, setTV] = useState("");
+
+  const onRoomTypleHandler = (event) => {
+    setRoomType(event.currentTarget.value)
+  }
+  
+  const onRoomNameHandler = (event) => {
+    setRoomName(event.currentTarget.value)
+  }
+
+  const onRoomAddressHandler = (event) => {
+    setRoomAddress(event.currentTarget.value)
+  }
+  
+  const onDateFromsHandler = (event) => {
+    setDateFrom(event.currentTarget.value)
+  }  
+
+  const onDateUptoHandler = (event) => {
+    setDateUpto(event.currentTarget.value)
+  }  
+
+  const onMaxGuestHandler = (event) => {
+    setMaxGuest(event.currentTarget.value)
+  }  
+
+  const onParkingHandler = (event) => {
+    setParking(event.currentTarget.value)
+  }  
+
+  const onKitchenHandler = (event) => {
+    setKitchen(event.currentTarget.value)
+  }  
+
+  const onWifiHandler = (event) => {
+    setWifi(event.currentTarget.value)
+  }  
+
+  const onAirconHandler = (event) => {
+    setAircon(event.currentTarget.value)
+  }  
+
+  const onWasherHandler = (event) => {
+    setWasher(event.currentTarget.value)
+  }  
+
+  const onTVHandler = (event) => {
+    setTV(event.currentTarget.value)
+  }  
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    let body = {
+      roomtype : RoomType,
+      roomname : RoomName,
+      roomaddress : RoomAddress,
+      datefrom : DateFrom,
+      dateupto : DateUpto,
+      maxguest : MaxGuest,
+      parking : Parking,
+      kitchen : Kitchen,
+      wifi : Wifi,
+      aircon : Aircon,
+      washer : Washer,
+      tv : TV
+    }
+    Host(body);
+  }
+    const Host=async (body) => {
+      try {
+        let data = {
+          roomtype : body.RoomType,
+          roomname : body.RoomName,
+          roomaddress : body.RoomAddress,
+          datefrom : body.DateFrom,
+          dateupto : body.DateUpto,
+          maxguest : body.MaxGuest,
+          parking : body.Parking,
+          kitchen : body.Kitchen,
+          wifi : body.Wifi,
+          aircon : body.Aircon,
+          washer : body.Washer,
+          tv : body.TV
+        }
+        const res = await axios.post(`http://ip/api/host/register`, data);
+        window.alert('신청이 완료되었습니다!');
+        navigate.push('/');
+        } catch(err) {
+          window.alert('입력한 정보를 다시 확인해주세요!')
+        }
+  }
+// 이 위로가 새로 추가한 코드입니다.
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -31,72 +136,113 @@ function BeHost() {
       <MdSupervisedUserCircle fontSize={25}/>
       <P onClick={handleOpen}>호스트 되기</P>
       </Wrap>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog onSubmit={onSubmitHandler} open={open} onClose={handleClose}>
           <PP>호스트 유저로 전환 신청</PP>
           <hr/>
         <DialogTitle fontFamily={"Md"} fontSize={20} fontWeight={"bolder"}>
           아래의 양식을 모두 채워주세요.
         </DialogTitle>
         <DialogContent>
-        <TextField
-            autoFocus
-            fontWeight="bolder"
-            margin="dense"
-            label="Room Type : 아파트/오피스텔/단독주택"
-            type="text"
-            fullWidth
-            variant="standard"
-        />
+        <FormControl sx={{
+          width : '90%',
+          display : 'flex',
+          margin : '10px auto',
+          flexDirection : 'row',
+          justifyContent : 'space-between'}}>
           <TextField
-            autoFocus
-            fontWeight="bolder"
-            margin="dense"
-            label="Room Name : 상호명/건물명"
-            type="text"
-            fullWidth
-            variant="standard"
+            helperText="아파트/오피스텔/단독주택"
+            label="Room Type"
+            value={RoomType}
+            onChange={onRoomTypleHandler}
           />
-            <TextField
-            autoFocus
-            fontWeight="bolder"
-            margin="dense"
-            label="Room Address : 주소"
-            type="text"
-            fullWidth
-            variant="standard"
+          <TextField
+            helperText="상호명/건물명"
+            label="Room Name"
+            value={RoomName}
+            onChange={onRoomNameHandler}
           />
-        <TextField
-            autoFocus
-            fontWeight="bolder"
-            margin="dense"
-            label="Available Date : 22.07.31~22.08.02 이용가능"
-            type="text"
-            // type="date"
-            fullWidth
-            variant="standard"
+        </FormControl>
+        <FormControl sx={{
+          width : '90%',
+          margin : '10px auto',
+          display : 'flex',
+          justifyContent : 'center'}}>
+        <TextField 
+            helperText="ex) 서울특별시 용산구 이태원로 22, 2층"
+            label="Room Address"
+            value={RoomAddress}
+            onChange={onRoomAddressHandler}
           />
+        </FormControl>        
+        <Br/>
         <FormGroup>
             <Opt>
-            <p>Max Guest</p>
-            <Box width={300}>
-              <Slider defaultValue={2} aria-label="Default" valueLabelDisplay="auto" />
-            </Box>
+              <p>Usable Date / Max Guest</p>
+              <AD>
+              <TextField
+                autoFocus
+                id="from"
+                margin="dense"
+                label=""
+                type="date"
+                variant="standard"
+                helperText="부터"
+                value={DateFrom}
+                onChange={onDateFromsHandler}
+              />
+              <TextField
+                autoFocus
+                id="to"
+                margin="dense"
+                type="date"
+                variant="standard"
+                helperText="까지"
+                value={DateUpto}
+                onChange={onDateUptoHandler}
+              />
+              /
+              <TextField
+                autoFocus
+                margin="dense"
+                type="number"
+                variant="standard"
+                helperText="최대 이용가능 인원"
+                value={MaxGuest}
+                onChange={onMaxGuestHandler}
+              />
+              </AD>
             </Opt>
         </FormGroup>
-        <FormGroup>
             <Opt>
-            <p>Option</p>
+            <p fontWeight='bolder'>Option</p>
             <OptCheck>
-            <FormControlLabel control={<Checkbox />} label="주차장" />
-            <FormControlLabel control={<Checkbox />} label="실내취사" />
-            <FormControlLabel control={<Checkbox />} label="Wifi" />
-            <FormControlLabel control={<Checkbox />} label="에어컨" />
-            <FormControlLabel control={<Checkbox />} label="세탁기" />
-            <FormControlLabel control={<Checkbox />} label="TV" />
-            </OptCheck>
+            <FormControlLabel 
+            value={Parking} onChange={onParkingHandler}
+            control={<Checkbox />} label="주차장"
+            />
+            <FormControlLabel
+            value={Kitchen} onChange={onKitchenHandler}
+            control={<Checkbox />} label="실내취사"
+            />
+            <FormControlLabel
+            value={Wifi} onChange={onWifiHandler}
+            control={<Checkbox defaultChecked />} label="Wifi"
+            />
+            <FormControlLabel
+            value={Aircon} onChange={onAirconHandler}
+            control={<Checkbox />} label="에어컨"
+            />
+            <FormControlLabel 
+            value={Washer} onChange={onWasherHandler}
+            control={<Checkbox />} label="세탁기" 
+            />
+            <FormControlLabel 
+            value={TV} onChange={onTVHandler}
+            control={<Checkbox />} label="TV" 
+            />
+            </OptCheck>            
             </Opt>
-        </FormGroup>
-          <Br/>
+          <hr/>
           <DialogContentText fontSize={12}>
           <PPP>개인정보처리방침</PPP>
             <p> 검토가 완료되면 호스트 유저로 전환되며, 기간은 휴일 외 5일 정도 소요됩니다. 
@@ -106,7 +252,7 @@ function BeHost() {
         </DialogContent>
         <DialogActions>        
           <Button onClick={handleClose}>취소</Button>
-          <Button onClick={handleOpen}>완료</Button>
+          <Button onClick={onSubmitHandler}>완료</Button>
         </DialogActions>
       </Dialog>
     </>
@@ -143,11 +289,18 @@ font-weight : bolder;
 `
 
 const Br = styled.div`
-margin-bottom : 10px;
+padding : 10px 0;
+`
+
+const AD = styled.div`
+display : flex;
+flex-direction : row;
+justify-content : space-around;
+align-items : center;
 `
 
 const Opt = styled.div`
-margin : 10px 0;
+margin : 5px 0;
 font-weight : bolder;
 `
 

@@ -26,26 +26,11 @@ function Login() {
   // P의 padding 탓은 아닌 것을 확인했습니다.
   return (
     <>
-      {/* <P onClick={()=>{
-        deleteCookie("Authorization");
-      }}>로그아웃</P> */}
-    <P onClick={handleOpen}>로그아웃</P>
-      <Dialog open={open} onClose={handleClose}>
-          <PP>로그아웃</PP>
-          <hr/>
-        <DialogTitle fontFamily={"Md"} fontSize={20} fontWeight={"bolder"}>
-          로그아웃하시겠습니까?
-        </DialogTitle>          
-        <DialogActions>        
-          <Button onClick={handleClose}>취소</Button>
-          <Button onClick={
-            () => {
-                navigate.push("/");
-            }}>완료</Button>
-        </DialogActions>
-      </Dialog>
+    <P onClick={()=>{
+      localStorage.removeItem("key")
+    }}>로그아웃</P>
     </>
-  );
+  )
 }
 
 export default Login
@@ -56,18 +41,4 @@ cursor : pointer;
   background-color : #f7f7f7;
   border-radius : 20px;
 }
-`
-
-const PP = styled.p`
-display : flex;
-align-items : center;
-justify-content : center;
-padding : 15px;
-font-size : 15px;
-font-weight : bolder;
-
-`
-
-const Br = styled.div`
-margin-bottom : 10px;
 `
