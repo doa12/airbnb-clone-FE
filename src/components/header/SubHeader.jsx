@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
+import { postingActions } from '../../redux/modules/postingSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { FaAirbnb } from 'react-icons/fa';
 import { MdApartment } from 'react-icons/md';
@@ -8,25 +10,29 @@ import { BsHouseFill, BsFilterRight } from 'react-icons/bs';
 
 
 const SubHeader = ({ setIsFilter }) => {
-    let location = useLocation();
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const iconClickHandler = (e) => {
+        dispatch(postingActions.changeStructType(e.currentTarget.dataset.name));
+    }
     if(location.pathname !== '/') return null;
     return(
         <SubHeaderWrapper>
             <SubHeaderContent>
                 <SubHeaderOption>
-                    <OptionDiv data-name='all'>
+                    <OptionDiv className='wrapper'data-name='all' onClick={iconClickHandler}>
                         <p className='subheader-icon'><FaAirbnb></FaAirbnb></p>
                         <p className='subheader-desc'>all</p>
                     </OptionDiv>
-                    <OptionDiv data-name='apartment'>
+                    <OptionDiv data-name='apartment' onClick={iconClickHandler}>
                         <p className='subheader-icon'><MdApartment/></p>
                         <p className='subheader-desc'>apartment</p>
                     </OptionDiv>
-                    <OptionDiv data-name='offistel'>
+                    <OptionDiv data-name='offistel' onClick={iconClickHandler}>
                         <p className='subheader-icon'><HiOfficeBuilding/></p>
                         <p className='subheader-desc'>offistel</p>
                     </OptionDiv>
-                    <OptionDiv data-name='house'>
+                    <OptionDiv data-name='house' onClick={iconClickHandler}>
                         <p className='subheader-icon'><BsHouseFill/></p>
                         <p className='subheader-desc'>house</p>
                     </OptionDiv>

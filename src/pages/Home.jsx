@@ -1,9 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { postingActions, fetchPostingDataFirst, fetchFilteringPostingDataFirst } from '../redux/modules/postingSlice';
 import PostingCard from '../components/posting/PostingCard';
-import PostingViewer from '../components/posting/PostingViewer';
+
 
 const Home = () => {
+    const [page, setPage] = useState(0);
+    const isFiltering = useSelector(state => state.posting.filtering.isFiltering);
+    const category = useSelector(state => state.posting.filtering.structType);
+    const postings = useSelector(state => state.posting.postings);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(!isFiltering) {
+            // dispatch(postingActions.setDefaultPostings());
+            dispatch(fetchPostingDataFirst());
+        }
+        else if(isFiltering) {
+            // dispatch(postingActions.setDefaultPostings());
+            dispatch(fetchFilteringPostingDataFirst())
+        }
+
+        return(()=> {
+            dispatch(postingActions.setDefaultPostings());
+        })
+        
+    }, [isFiltering, category])
+
+    useEffect(()=> {
+        if(page === 0) return;
+        else {
+            // 무한스크롤 로직
+            if(!isFiltering) {
+
+            }
+            else if(isFiltering) {
+
+            }
+            console.log('hello');
+        }
+    }, [page])
 
     return(
         <HomeContainer>
