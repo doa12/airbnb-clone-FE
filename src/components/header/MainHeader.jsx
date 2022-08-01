@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FaSearch } from 'react-icons/fa';
 import PersonalButtons from './PersonalButtons';
 
 const MainHeader = () => {
@@ -18,7 +19,10 @@ const MainHeader = () => {
                     <p>airbnb</p>
                     </HeaderLogoArea>
                     <HeaderSearchArea>
-                        <HeaderInput>
+                    <HeaderInputButton>
+                        <FaSearch/>
+                    </HeaderInputButton>
+                        <HeaderInput placeholder='지역으로 검색하세요!'>
 
                         </HeaderInput>
                     </HeaderSearchArea>
@@ -84,6 +88,7 @@ const HeaderLogoArea = styled.div`
 `
 
 const HeaderSearchArea = styled.div`
+    position:relative;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -115,5 +120,23 @@ const HeaderInput = styled.input`
     border-radius:20px;
     border:1px solid lightgray;
     box-shadow:1px 1px gray;
+    padding-right:50px;
+    padding-left:20px;
+    font-size:16px;
+    font-weight:bold;
 
+`
+
+const HeaderInputButton = styled.div`
+    position:absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    right:20px;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:${({theme}) => theme.colors.airbnb_red};
+    color:white;
+    cursor:pointer;
 `
