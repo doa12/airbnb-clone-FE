@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import { deleteCookie } from "../../shared/Cookie";
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux"
@@ -25,6 +26,9 @@ function Login() {
   // P의 padding 탓은 아닌 것을 확인했습니다.
   return (
     <>
+      {/* <P onClick={()=>{
+        deleteCookie("Authorization");
+      }}>로그아웃</P> */}
     <P onClick={handleOpen}>로그아웃</P>
       <Dialog open={open} onClose={handleClose}>
           <PP>로그아웃</PP>
