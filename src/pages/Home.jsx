@@ -9,6 +9,7 @@ const Home = () => {
     const [page, setPage] = useState(0);
     const isFiltering = useSelector(state => state.posting.filtering.isFiltering);
     const category = useSelector(state => state.posting.filtering.structType);
+    const options = useSelector(state => state.posting.filtering.options);
     const postings = useSelector(state => state.posting.postings);
     const dispatch = useDispatch();
 
@@ -26,7 +27,7 @@ const Home = () => {
             dispatch(postingActions.setDefaultPostings());
         })
         
-    }, [isFiltering, category])
+    }, [isFiltering, category, options])
 
     useEffect(()=> {
         if(page === 0) return;

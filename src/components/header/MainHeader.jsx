@@ -111,6 +111,9 @@ const HeaderActionsArea = styled.div`
     @media screen and (min-width:748px) {
         display:flex;
     }
+    p {
+        cursor:pointer;
+    }
     /* background:yellow; */
 `
 

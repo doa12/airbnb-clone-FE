@@ -7,12 +7,12 @@ const initialState = {
         structType:"all",
         isFiltering:false,
         options:{
-            isParking:false,
-            isKitchen:false,
-            isWifi:false,
-            isAircon:false,
-            isWasher:false,
-            isTV:false,
+            isParking:"false",
+            isKitchen:"false",
+            isWifi:"false",
+            isAircon:"false",
+            isWasher:"false",
+            isTV:"false",
             minPrice:"0",
             maxPrice:"10000000"
         }
@@ -77,11 +77,11 @@ const postingSlice = createSlice({
         setDefaultIsLast:(state) => {
             state.isLast = false;
         },
-        setDefaultIsFiltering:(state) => {
-            // 필터 끄기 기능 넣기
-            state.filtering.isFiltering = false;
+        setTrueIsFiltering:(state) => {
+            state.filtering.isFiltering = true;
         },
         closeFiltering:(state) => {
+            // 필터링 기능 끄기
             const defaultFiltering = {
                 structType:"all",
                 isFiltering:false,
@@ -97,6 +97,7 @@ const postingSlice = createSlice({
                 }
             }
             state.filtering = defaultFiltering;
+            state.filtering.isFiltering = false;
         },
         setDefaultCategory: (state) => {
             state.filtering.category = "all";

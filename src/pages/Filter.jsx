@@ -1,7 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Filter = ({ setIsFilter }) => {
+
+    const [data, setData] = useState({
+        isParking:"false",
+        isKitchen:"false",
+        isWifi:"false",
+        isAircon:"false",
+        isWasher:"false",
+        isTV:"false",
+        minPrice:"",
+        maxPrice:""
+    });
 
     // 모달창이 보여질 때 배경의 스크롤을 막기 위한 코드
     useEffect(() => {
@@ -25,14 +36,66 @@ const Filter = ({ setIsFilter }) => {
         }
     }
 
+    const checkBoxClickHandler = (e) => {
+        if(e.target.checked) {
+            setData({...data, [e.target.name]:e.target.value});
+        }
+        else {
+            setData({...data, [e.target.name]:"false"});
+        }
+    }
+
+    const priceChangeHandler = (e) => {
+        setData({...data, [e.target.name]:e.target.value});
+    }
+
     return(
         <FilterWrapper className='filter-wrapper' onClick={ClickHandler}>
             <FilterContent>
                 <FilterHeader><p>필터</p></FilterHeader>
                 <FilterController>
-                    dddd
+                    <div className='controller-wrap'>
+                        <h2>가격 범위</h2>
+                        <div className='price-controller'>
+                            <input placeholder='최저 가격' name="minPrice" onChange={priceChangeHandler} value={data.minPrice}></input>
+                            <span> ~ </span>
+                            <input placeholder='최고 가격' name="maxPrice" onChange={priceChangeHandler} value={data.maxPrice}></input>
+                        </div>
+                    </div>
+                    <div className='controller-wrap'>
+                        <h2>편의시설</h2>
+                        {/* <div className='price-controller'> */}
+                        <div>
+                            <label htmlFor="isParking">주차장</label>
+                            <input type="checkbox" id="isParking" name="isParking" value="true" onClick={checkBoxClickHandler}/>
+                        </div>
+                        <div>
+                            <label htmlFor="isKitchen">부엌/취사</label>
+                            <input type="checkbox" id="isKitchen" name="isKitchen" value="true" onClick={checkBoxClickHandler}/>
+                        </div>
+                        <div>
+                            <label htmlFor="isWifi">무선인터넷</label>
+                            <input type="checkbox" id="isWifi" name="isWifi" value="true" onClick={checkBoxClickHandler}/>
+                        </div>
+                        <div>
+                            <label htmlFor="isAircon">에어컨</label>
+                            <input type="checkbox" id="isAircon" name="isAircon" value="true" onClick={checkBoxClickHandler}/>
+                        </div>
+                        <div>
+                            <label htmlFor="isWasher">세탁기</label>
+                            <input type="checkbox" id="isWasher" name="isWasher" value="true" onClick={checkBoxClickHandler}/>
+                        </div>
+                        <div>
+                            <label htmlFor="isTV">TV</label>
+                            <input type="checkbox" id="isTV" name="isTV" value="true" onClick={checkBoxClickHandler}/>
+                        </div>
+                        {/* </div> */}
+                    </div>
+                    
                 </FilterController>
-                <FilterFooter></FilterFooter>
+                <FilterFooter>
+
+                </FilterFooter>
             </FilterContent>
         </FilterWrapper>
     )
@@ -66,23 +129,46 @@ const FilterHeader = styled.div`
     align-items:center;
     width:100%;
     height:10%;
-    background:yellow;
-    border-radius:20px;
+    /* background:yellow; */
+    border-bottom:1px solid lightgray;
+    
     font-weight:bold;
     box-sizing:border-box;
 `
 
 const FilterController = styled.div`
+    display:flex;
+    flex-direction:column;
+    gap:20px;
     padding: 20px;
     width:100%;
     height:80%;
     
     box-sizing:border-box;
+
+    .controller-wrap {
+        border-bottom:1px solid lightgray;
+        padding-bottom:20px;
+        h2 {
+            margin-bottom:20px;
+        }
+        .price-controller {
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:10px;
+            input {
+                padding:10px;
+                border-radius:10px;
+            }
+        }
+    }
 `
 const FilterFooter = styled.div`
     padding: 20px;
     width:100%;
     height:10%;
-    background:black;
+    /* background:black; */
     box-sizing:border-box;
+    border-top:1px solid lightgray;
 `
