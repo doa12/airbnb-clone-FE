@@ -17,18 +17,22 @@ const Filter = ({ setIsFilter }) => {
         };
       }, []);
 
-      
+
 
     const ClickHandler = (e) => {
-        if(!e.target.classList.contains('filter-content')) {
+        if(e.target.classList.contains('filter-wrapper')) {
             setIsFilter(false);
         }
     }
 
     return(
-        <FilterWrapper onClick={ClickHandler}>
-            <FilterContent className='filter-content'>
-
+        <FilterWrapper className='filter-wrapper' onClick={ClickHandler}>
+            <FilterContent>
+                <FilterHeader><p>필터</p></FilterHeader>
+                <FilterController>
+                    dddd
+                </FilterController>
+                <FilterFooter></FilterFooter>
             </FilterContent>
         </FilterWrapper>
     )
@@ -46,7 +50,7 @@ const FilterWrapper = styled.div`
     width:100vw;
     height:100vh;
     background:rgba(220,220,220,0.6);
-    z-index:1000
+    z-index:1000;
 `
 
 const FilterContent = styled.div`
@@ -54,4 +58,31 @@ const FilterContent = styled.div`
     height:80vh;
     background:white;
     border-radius:20px;
+`
+const FilterHeader = styled.div`
+    padding: 20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:10%;
+    background:yellow;
+    border-radius:20px;
+    font-weight:bold;
+    box-sizing:border-box;
+`
+
+const FilterController = styled.div`
+    padding: 20px;
+    width:100%;
+    height:80%;
+    
+    box-sizing:border-box;
+`
+const FilterFooter = styled.div`
+    padding: 20px;
+    width:100%;
+    height:10%;
+    background:black;
+    box-sizing:border-box;
 `
