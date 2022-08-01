@@ -4,7 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { userActions } from './redux/modules/userSlice';
 import styled, { ThemeProvider} from 'styled-components';
 import GlobalStyle from './style/GlobalStyle';
+
 import Home from './pages/Home';
+// import Home from './pages/WishList';
+// WishList를 보고 싶으면 위의 주석을 풀고 이 문단의 첫 번째 코드를 주석처리하세요.
+
 import MainHeader from './components/header/MainHeader';
 import SubHeader from './components/header/SubHeader';
 import theme from './style/theme';
@@ -17,6 +21,14 @@ const App = () => {
     <div className="App">
       <GlobalStyle />
       <MainHeader/>
+
+      {/* <TestWish>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+      </Routes> 
+      </TestWish>  */}
+      {/* WishList를 보고 싶으면 위의 주석을 풀고 아래 문단의 코드를 주석처리하세요. */}
+
       <SubHeader setIsFilter={setIsFilter}/>
       {isFilter?<Filter setIsFilter={setIsFilter}/>:null}
       <Content>
@@ -25,6 +37,7 @@ const App = () => {
           <Route path='/detail/:id' element={<Detail/>}></Route>
         </Routes>
       </Content>
+
     </div>
     </ThemeProvider>
   );
@@ -40,4 +53,11 @@ const Content = styled.div`
   padding-top:85px;
 `
 
+// WishList를 보고 싶으면 아래의 주석을 풀고 위 문단의 코드를 주석처리하세요.
 
+// const TestWish = styled.div`
+//   width:90%;
+//   /* background:yellow; */
+//   margin: 0 auto;
+//   padding-top:100px;
+// `

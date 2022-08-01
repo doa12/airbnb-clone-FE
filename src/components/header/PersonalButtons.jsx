@@ -8,6 +8,7 @@ import Signup from '../modal/Signup';
 import Login from '../modal/Login';
 import Logout from '../modal/Logout';
 import WishList from '../../pages/WishList'
+import HostPosting from '../../pages/HostPosting'
 
 const PersonalButtons = () => {
   const navigate = useNavigate();
@@ -95,6 +96,7 @@ const PersonalButtons = () => {
                       }}>위시리스트
                     </MenuItem>
                     <MenuItem onClick={handleClose}>예약현황</MenuItem>
+                    <MenuItem><HostPosting/></MenuItem>
                     <MenuItem><Logout/></MenuItem>
                     
                   </MenuList>
