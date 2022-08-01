@@ -3,19 +3,13 @@ import styled from 'styled-components';
 import { Card, CardActions, CardContent, CardMedia,
   Box, Button, Typography
 } from '@mui/material';
-import { BsFillStarFill, BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
-
+import { BsFillStarFill } from 'react-icons/bs';
 
 const PostingCard = () => {
     // 추후 함수형 초기화로 데이터를 받아와서 false true값 설정
-    const [wish, setWish] = useState(false);
     return (
       <>
         <CardWrapper>
-          <p className='wish-icon' onClick={
-            ()=>setWish((wish) => (!wish))}>{
-            !wish?<BsSuitHeart color='#ff415e'/>
-            :<BsSuitHeartFill color='#ff415e'/>}</p>
         <Card sx={{
           maxWidth: "100%", border:"none", borderRadius:"10px",
           display:"flex", alignItems:"center"
@@ -31,24 +25,21 @@ const PostingCard = () => {
           </Box>
           <Box width='67%'>
           <CardContent sx={{border:'none', marginLeft:'10px'}}>
-            <Typography fontSize={12} gutterBottom variant="p" component="div" sx={{color:"gray", fontWeight:"bold"}}>
-            <BsFillStarFill color='#ff415e'/>4.9 / 한옥 TOP 1
+          <Typography fontSize={12} gutterBottom variant="p" component="div" sx={{color:"gray", fontWeight:"bold"}}>
+              22-08-02 이용완료
             </Typography>
-            <Typography gutterBottom variant="h6" component="div" sx={{fontWeight:"bold"}}>
+              
+            <Typography gutterBottom variant="h6" component="div" sx={{color:"gray", fontWeight:"bold", textDecoration:"line-through"}}>
               하동월영재, 올모스트홈
             </Typography>
             <Br/>
-            <Typography fontSize={12} gutterBottom variant="p" component="div" sx={{color:"gray"}}>
-              최대 인원 6명 · 침실 3개 · 침대 2개 · 욕실 1개
-            </Typography>
             <Price>
-            <Typography fontSize={15} gutterBottom variant="h7" component="div" sx={{fontWeight:"bold"}}>
-              한옥독채, 한국
-            </Typography>
+            <BsFillStarFill color='#ff415e'/><Span></Span>4.9
             </Price>
+            <Br/>
             <Price>
             <Typography fontSize={15} gutterBottom variant="h7" component="div" sx={{fontWeight:"bold"}}>
-              ￦180,000 / 1박
+              이용완료된 숙소입니다.
             </Typography>
             </Price>
           </CardContent>
@@ -95,4 +86,11 @@ justify-content : flex-end;
 align-items : center;
 font-weight : bolder;
 color : black;
+`
+
+const Span = styled.span`
+text-decoration : underline;
+: hover{
+    cursor : pointer;
+}
 `

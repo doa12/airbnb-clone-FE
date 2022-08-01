@@ -8,6 +8,8 @@ import GlobalStyle from './style/GlobalStyle';
 import Home from './pages/Home';
 // import Home from './pages/WishList';
 // WishList를 보고 싶으면 위의 주석을 풀고 이 문단의 첫 번째 코드를 주석처리하세요.
+// Book페이지를 보고 싶으면 아래의 주석을 풀고 이 문단의 첫 번째 코드를 주석처리하세요.
+// import Home from './pages/Book';
 
 import MainHeader from './components/header/MainHeader';
 import SubHeader from './components/header/SubHeader';
@@ -27,7 +29,7 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
       </Routes> 
       </TestWish>  */}
-      {/* WishList를 보고 싶으면 위의 주석을 풀고 아래 문단의 코드를 주석처리하세요. */}
+      {/* WishList 또는 Book을 보고 싶으면 위의 주석을 풀고 아래 문단의 코드를 주석처리하세요. */}
 
       <SubHeader setIsFilter={setIsFilter}/>
       {isFilter?<Filter setIsFilter={setIsFilter}/>:null}

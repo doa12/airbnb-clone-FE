@@ -95,8 +95,11 @@ const PersonalButtons = () => {
                         )
                       }}>위시리스트
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>예약현황</MenuItem>
-                    <MenuItem><HostPosting/></MenuItem>
+                    <MenuItem onClick={()=>{
+                      navigate.push(
+                        '/api/mypage/reservation?page=0부터시작&size=20&sort=createdAt,DESC'
+                        )
+                      }}>예약내역</MenuItem>
                     <MenuItem><Logout/></MenuItem>
                     
                   </MenuList>
