@@ -23,6 +23,7 @@ function HostPosting() {
   // const [DateFrom, setDateFrom] = useState("");
   // const [DateUpto, setDateUpto] = useState("");
   const [MaxGuest, setMaxGuest] = useState("");
+  const [Price, setPrice] = useState("");
   const [Parking, setParking] = useState("");
   const [Kitchen, setKitchen] = useState("");
   const [Wifi, setWifi] = useState("");
@@ -66,6 +67,10 @@ function HostPosting() {
     setMaxGuest(event.currentTarget.value)
   }  
 
+  const onPriceHandler = (event) => {
+    setPrice(event.currentTarget.value)
+  }  
+
   const onParkingHandler = (event) => {
     setParking(event.currentTarget.value)
   }  
@@ -102,6 +107,7 @@ function HostPosting() {
       // datefrom : DateFrom,
       // dateupto : DateUpto,
       maxguest : MaxGuest,
+      price : Price,
       parking : Parking,
       kitchen : Kitchen,
       wifi : Wifi,
@@ -123,6 +129,7 @@ function HostPosting() {
           datefrom : body.DateFrom,
           dateupto : body.DateUpto,
           maxguest : body.MaxGuest,
+          price : body.Price,
           parking : body.Parking,
           kitchen : body.Kitchen,
           wifi : body.Wifi,
@@ -197,6 +204,18 @@ function HostPosting() {
                 helperText="최대 이용가능 인원"
                 value={MaxGuest}
                 onChange={onMaxGuestHandler}
+              />
+          </Opt2>
+          <Opt2>
+            <p>Price / day</p>
+              <TextField
+                autoFocus
+                margin="0 auto"
+                type="text"
+                variant="standard"
+                helperText="1박 가격"
+                value={Price}
+                onChange={onPriceHandler}
               />
           </Opt2>
           </FormControl>
@@ -337,8 +356,9 @@ font-weight : bolder;
 `
 
 const Opt2 = styled.div`
-width : 45%;
+width : 20%;
 margin : 5px 0;
+padding-right : 1%;
 font-size : 15px;
 font-weight : bolder;
 `
