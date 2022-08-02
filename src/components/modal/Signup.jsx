@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 import { Dialog, DialogTitle, DialogActions,
 DialogContent, DialogContentText, 
 Button, TextField } from '@mui/material';
+import instance from '../../shared/axios';
 
 
 function Signup() {
@@ -14,6 +15,17 @@ function Signup() {
   const [UserName, setUserName] = useState("");
   const [Password, setPassword] = useState("");
   const [CheckPassword, setCheckPassword] = useState("");
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const onUserNameHandler = (event) => {
     setUserName(event.currentTarget.value);
@@ -27,7 +39,7 @@ function Signup() {
     setCheckPassword(event.currentTarget.value);
   };
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = async (event) => {
     event.preventDefault();
 
     if (Password !== CheckPassword) {
@@ -37,42 +49,25 @@ function Signup() {
     let body = {
       username: UserName,
       password: Password,
-      checkpassword: CheckPassword
+      passwordcheck: CheckPassword
     };
 
-    Signup(body);
+    const res = await instance.post('/api/signup', body).catch((e) => {
+      console.log(e);
+      alert('회원가입 요청 실패!');
+      return;
+    })
+    const data = res.data;
+    // if(data.status) {
+    //   alert('회원가입 실패!');
+    // return;
+    // }
+    
+    alert(data.message);
+    handleClose();
   };
 
-  const Signup = async (body) => {
-    try {
-      let data = {
-        username: body.username,
-        password: body.password,
-        checkpassword: body.checkpassword
-      };
-      // console.log(data);
-      const res = await axios.post(`http://ip/api/signup`, data);
-      window.alert("회원가입 성공! 이제 여행을 떠나볼까요?");
-      navigate.push("/");
-    } catch (err) {
-      window.alert("회원정보를 다시 확인해주세요!");
-    }
-  };
   
-  // 이 위로가 새로 추가한 코드입니다.
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <>
@@ -80,7 +75,7 @@ function Signup() {
       <Dialog open={open} onClose={handleClose} >
           <PP>회원가입</PP>
           <hr/>
-        <DialogTitle fontFamily={"Md"} fontSize={20} fontWeight={"bolder"}>
+        <DialogTitle fontFamily={"Md"} fontSize={"20"} fontWeight={"bolder"}>
           에어비앤비에 오신 것을 환영합니다.
         </DialogTitle>
         <DialogContent>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Button, ClickAwayListener, Grow, Paper, Popper,
   MenuItem, MenuList, Stack } from '@mui/material';
 import styled from 'styled-components';
@@ -8,9 +9,11 @@ import Signup from '../modal/Signup';
 import Login from '../modal/Login';
 import Logout from '../modal/Logout';
 import WishList from '../../pages/WishList'
+import { userActions } from '../../redux/modules/userSlice';
 
 const PersonalButtons = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -45,6 +48,12 @@ const PersonalButtons = () => {
 
     prevOpen.current = open;
   }, [open]);
+
+  const logoutHandler = () => {
+    localStorage.removeItem('Authorization');
+    dispatch(userActions.deleteUserInfo());
+    handleClose();
+  }
 
   return (
     <Stack direction="row" spacing={2}>
@@ -95,7 +104,7 @@ const PersonalButtons = () => {
                       }}>위시리스트
                     </MenuItem>
                     <MenuItem onClick={handleClose}>예약현황</MenuItem>
-                    <MenuItem><Logout/></MenuItem>
+                    <MenuItem onClick={logoutHandler}>로그아웃</MenuItem>
                     
                   </MenuList>
                 </ClickAwayListener>
