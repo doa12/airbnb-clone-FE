@@ -9,7 +9,9 @@ import Signup from '../modal/Signup';
 import Login from '../modal/Login';
 import Logout from '../modal/Logout';
 import WishList from '../../pages/WishList'
+import HostPosting from '../../pages/HostPosting'
 import { userActions } from '../../redux/modules/userSlice';
+
 
 const PersonalButtons = () => {
   const navigate = useNavigate();
@@ -103,8 +105,17 @@ const PersonalButtons = () => {
                         )
                       }}>위시리스트
                     </MenuItem>
+
+                    <MenuItem onClick={()=>{
+                      navigate.push(
+                        '/api/mypage/reservation?page=0부터시작&size=20&sort=createdAt,DESC'
+                        )
+                      }}>예약내역</MenuItem>
+                    <MenuItem><Logout/></MenuItem>
+
                     <MenuItem onClick={handleClose}>예약현황</MenuItem>
                     <MenuItem onClick={logoutHandler}>로그아웃</MenuItem>
+
                     
                   </MenuList>
                 </ClickAwayListener>

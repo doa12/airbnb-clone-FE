@@ -27,13 +27,13 @@ const PostingCard = () => {
           </CardMedia>
           <CardContent sx={{border:'none'}}>
             <Typography gutterBottom variant="h6" component="div" sx={{fontWeight:"bold"}}>
-              자연휴양림, 한국
+              한옥독채, 한국
             </Typography>
             <Typography gutterBottom variant="p" component="div" sx={{color:"gray"}}>
-              가평국립공원
+              하동월영재, 올모스트홈
             </Typography>
             <Typography gutterBottom variant="p" component="div" sx={{color:"gray"}}>
-              ￦311,930 / 박
+              ￦180,000 / 1박
             </Typography>
           </CardContent>
         </Card>
