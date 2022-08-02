@@ -28,7 +28,7 @@ const MainHeader = () => {
                         </HeaderInput>
                     </HeaderSearchArea>
                     <HeaderActionsArea>
-                        <BeHost/>
+                        <BeHost />
                         <PersonalButtons/>
                     </HeaderActionsArea>
                     

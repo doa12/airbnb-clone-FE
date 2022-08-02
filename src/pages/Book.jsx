@@ -86,7 +86,7 @@ font-weight : normal;
 
 const Span = styled.span`
 text-decoration : underline;
-: hover{
+:hover{
     cursor : pointer;
 }
 `
@@ -98,7 +98,7 @@ border-radius : 10px;
 padding : 10px 15px;
 font-weight : bolder;
 color : #ff415e;
-: hover{
+:hover{
     background-color : #ff415e;
     color : white;
     cursor : pointer;

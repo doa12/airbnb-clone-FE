@@ -54,7 +54,7 @@ const Filter = ({ setIsFilter }) => {
             <FilterContent>
                 <FilterHeader><p>필터</p></FilterHeader>
                 <FilterController>
-                    <div className='controller-wrap'>
+                    <div className='price-wrap'>
                         <h2>가격 범위</h2>
                         <div className='price-controller'>
                             <input placeholder='최저 가격' name="minPrice" onChange={priceChangeHandler} value={data.minPrice}></input>
@@ -94,7 +94,8 @@ const Filter = ({ setIsFilter }) => {
                     
                 </FilterController>
                 <FilterFooter>
-
+                    <p>필터초기화</p>
+                    <button>표시</button>
                 </FilterFooter>
             </FilterContent>
         </FilterWrapper>
@@ -142,12 +143,11 @@ const FilterController = styled.div`
     gap:20px;
     padding: 20px;
     width:100%;
-    height:80%;
+    height:75%;
     
     box-sizing:border-box;
 
-    .controller-wrap {
-        border-bottom:1px solid lightgray;
+    .controller-wrap, .price-wrap {
         padding-bottom:20px;
         h2 {
             margin-bottom:20px;
@@ -163,12 +163,33 @@ const FilterController = styled.div`
             }
         }
     }
+    .price-wrap {
+        border-bottom:1px solid lightgray;
+    }
 `
 const FilterFooter = styled.div`
+    display:flex;
+    align-items:center;
     padding: 20px;
     width:100%;
-    height:10%;
+    height:15%;
     /* background:black; */
     box-sizing:border-box;
     border-top:1px solid lightgray;
+    p {
+        flex:1;
+        cursor:pointer;
+        font-weight:bold;
+    }
+    button {
+        cursor:pointer;
+        width:30%;
+        height:90%;
+        border-radius:10px;
+        background:black;
+        color:white;
+        font-weight:bold;
+        font-size:17px;
+    }
 `
+

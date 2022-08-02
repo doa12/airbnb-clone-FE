@@ -66,7 +66,7 @@ const PersonalButtons = () => {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          <FaUserCircle fontSize={23}/>
+          <FaUserCircle fontSize={"23"}/>
         </Button>
         
         <Popper
@@ -97,6 +97,7 @@ const PersonalButtons = () => {
                   >
                     <MenuItem><Signup/></MenuItem>
                     <MenuItem><Login/></MenuItem>
+
                     <MenuItem onClick={()=>{
                       navigate.push(
                         '/WishList'
@@ -115,6 +116,7 @@ const PersonalButtons = () => {
                         )
                       }}>숙소 등록하기</MenuItem>  
                     <MenuItem><Logout/></MenuItem>
+
 
                     {/* <MenuItem onClick={handleClose}>예약현황</MenuItem>
                     <MenuItem onClick={logoutHandler}>로그아웃</MenuItem> */}
