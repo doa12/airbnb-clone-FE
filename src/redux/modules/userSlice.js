@@ -2,9 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     userInfo:{
-
+        nickname:''
     },
-    isAppend:false
 }
 
 
@@ -12,8 +11,11 @@ const userSlice = createSlice({
     name:'user',
     initialState,
     reducers: {
-        toggleIsAppend:(state, action)=> {
-            state.isAppend = !state.isAppend;
+        setUserInfo: (state, action) => {
+            state.userInfo.nickname = action.payload;
+        },
+        deleteUserInfo: (state) => {
+            state.userInfo.nickname = '';
         }
     }
 })

@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import instance from '../../shared/axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux"
 import { Dialog, DialogTitle, DialogActions,
 DialogContent, DialogContentText, 
 Button, TextField } from '@mui/material';
+import { userActions } from '../../redux/modules/userSlice';
 
 
 function Login() {
-// 여기서부터 새로 추가된 코드입니다.
 
-  const LOAD = "userSlice/LOAD"
-
-  const initialState = {
-    isAuth : false,
-    token : "",
-  }
-
-  function loadUser(userList) {
-    console.log("유저를 로딩합니다.")
-    return {type : loadUser, userList}
-  }
   const [UserName, setUserName] = useState("");
   const [Password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const onUserNameHandler = (event) => {
     setUserName(event.currentTarget.value);
@@ -33,7 +34,7 @@ function Login() {
     setPassword(event.currentTarget.value);
   };
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler =  async (event) => {
     event.preventDefault();
 
     console.log("UserName", UserName);
@@ -44,50 +45,33 @@ function Login() {
       password: Password,
     };
 
-    Login(body);
+    // Login(body);
+    const res = await instance.post('/api/login', body).catch((e) => {
+      console.log(e);
+      alert("로그인 요청 실패!");
+    });
+    const data = res.data;
+    
+    // if(data.status === false) {
+          // alert('로그인 실패!!');
+          // return;
+    // }
+    dispatch(userActions.setUserInfo(UserName));
+    localStorage.setItem('Authorization', res.headers.Authorization);
+    alert(data.message);
+
+    handleClose();
+
   };
 
-  const Login = async (body) => {
-    try {
-      let data = {
-        username: body.username,
-        password: body.password,
-      };
-            
-      const res = await axios.post(`http://ip/api/login`, data);
-      // console.log(res);
-      // console.log(res.headers.authorization);
-
-      dispatch(loadUser(res.headers.authorization));
-      // const token = res.headers.authorization;
-      // setCookie(token);
-      window.alert("이번엔 어디로 떠나볼까요?");
-      navigate.push("/");
-    } catch (err) {
-      window.alert("로그인 실패!");
-    }
-  };
-
-  // 이 위로가 새로 추가한 코드입니다.
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  
 
   // 모달을 띄우면 subheader(red div) 오른쪽이 살짝 늘어나는데 혹시 해결방법이 있을까요?
   // P의 padding 탓은 아닌 것을 확인했습니다.
   return (
     <>
     <P onClick={handleOpen}>로그인</P>
-      <Dialog open={open} onClose={handleClose} maxWidth>
+      <Dialog open={open} onClose={handleClose} >
           <PP>로그인</PP>
           <hr/>
         <DialogTitle fontFamily={"Md"} fontSize={20} fontWeight={"bolder"}>
