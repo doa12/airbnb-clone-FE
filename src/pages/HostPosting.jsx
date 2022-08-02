@@ -3,13 +3,16 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux"
-import { Dialog, DialogTitle, DialogActions,
-DialogContent, DialogContentText, 
-Button, TextField, Checkbox, IconButton, Stack,
-FormGroup, FormControl, FormControlLabel } from '@mui/material';
+
+import { Button, IconButton, TextField, Checkbox,
+FormControl, FormControlLabel } from '@mui/material';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+
+import Header from '../components/header/MainHeader'
 
 
-function BeHost() {
+
+function HostPosting() {
   // 여기서부터 추가된 코드입니다.
   const [Image, setImage] = useState("");
   const [Apartment, setApartment] = useState("");
@@ -20,6 +23,7 @@ function BeHost() {
   // const [DateFrom, setDateFrom] = useState("");
   // const [DateUpto, setDateUpto] = useState("");
   const [MaxGuest, setMaxGuest] = useState("");
+  const [Price, setPrice] = useState("");
   const [Parking, setParking] = useState("");
   const [Kitchen, setKitchen] = useState("");
   const [Wifi, setWifi] = useState("");
@@ -63,6 +67,10 @@ function BeHost() {
     setMaxGuest(event.currentTarget.value)
   }  
 
+  const onPriceHandler = (event) => {
+    setPrice(event.currentTarget.value)
+  }  
+
   const onParkingHandler = (event) => {
     setParking(event.currentTarget.value)
   }  
@@ -99,6 +107,7 @@ function BeHost() {
       // datefrom : DateFrom,
       // dateupto : DateUpto,
       maxguest : MaxGuest,
+      price : Price,
       parking : Parking,
       kitchen : Kitchen,
       wifi : Wifi,
@@ -120,6 +129,7 @@ function BeHost() {
           datefrom : body.DateFrom,
           dateupto : body.DateUpto,
           maxguest : body.MaxGuest,
+          price : body.Price,
           parking : body.Parking,
           kitchen : body.Kitchen,
           wifi : body.Wifi,
@@ -138,42 +148,31 @@ function BeHost() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <>
-      {/* <P onClick={()=>{navigate.push('/api/host/room')
-        }}>숙소 등록하기</P> */}
-      <P onClick={handleOpen}>숙소 등록하기</P>
-      <Dialog fullWidth onSubmit={onSubmitHandler} open={open} onClose={handleClose}>
-          <PP>숙소 등록</PP>
-          <hr/>
-        <DialogTitle fontFamily={"Md"} fontSize={20} fontWeight={"bolder"}>
-          <p>Upload Image</p>
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <Button value={Image} onChange={onImagetHandler}
-            variant="contained" component="label">
-              숙소 이미지 등록
-              <input hidden accept="image/*" multiple type="file" />
-            </Button>
-          </Stack>
-        </DialogTitle>
-        <hr/>
-        <DialogTitle fontFamily={"Md"} fontSize={15} fontWeight={"bolder"}>
-          <p>아래의 양식을 채워주세요.</p>
-          <p>체크박스는 등록할 숙소와 일치하는 항목을 적어도 1개 선택해주세요.</p>
-        </DialogTitle>
-        <DialogContent>
+      <Header/>
+      <HomeContainer>
+      <T>
+        <p>숙소 등록하기</p>
+        <XST>
+          <p>아래의 양식을 <Span>모두</Span> 채워주세요.</p>
+        </XST>
+        <Br/>
+        <Hr/>
+        <ST>
+          <Br/>
+          <P>이미지 업로드
+          <IconButton value={Image} onChange={onImagetHandler}
+          color="warning" aria-label="upload picture" component="label">
+            <input hidden accept="image/*" type="file" />
+            <PhotoCamera />
+          </IconButton>
+          </P>
+        </ST>
+      </T>
+      <Wrap>
         <FormControl sx={{
-          width : '90%',
+          width : '100%',
           display : 'flex',
           margin : '10px auto',
           flexDirection : 'row',
@@ -195,133 +194,190 @@ function BeHost() {
             />
             </OptCheck>
           </Opt>
-          </FormControl>
-        <FormControl sx={{
-          width : '90%',
-          margin : '10px auto',
-          display : 'flex',
-          justifyContent : 'center'}}>
-        <TextField 
-            helperText="숙소 이름"
-            label="Room Name"
-            value={RoomAddress}
-            onChange={onRoomAddressHandler}>
-        </TextField>
-        <TextField 
-            helperText="ex) 서울특별시 용산구 이태원로 22, 2층"
-            label="Room Address"
-            value={RoomAddress}
-            onChange={onRoomAddressHandler}
-          />
-        </FormControl>        
-        <FormGroup sx={{
-          width : '90%',
-          margin : '10px auto',
-          display : 'flex',
-          justifyContent : 'center'}}>
-            <Opt>
+          <Opt2>
             <p>Max Guest</p>
-              {/* <p>Usable Date / Max Guest</p> */}
-              {/* <AD>
               <TextField
                 autoFocus
-                id="from"
-                margin="dense"
-                label=""
-                type="date"
-                variant="standard"
-                helperText="부터"
-                value={DateFrom}
-                onChange={onDateFromsHandler}
-              />
-              <TextField
-                autoFocus
-                id="to"
-                margin="dense"
-                type="date"
-                variant="standard"
-                helperText="까지"
-                value={DateUpto}
-                onChange={onDateUptoHandler}
-              />
-              / */}
-              <TextField
-                autoFocus
-                margin="dense"
+                margin="0 auto"
                 type="number"
                 variant="standard"
                 helperText="최대 이용가능 인원"
                 value={MaxGuest}
                 onChange={onMaxGuestHandler}
               />
-              {/* </AD> */}
-            </Opt>
-        </FormGroup>
-        <FormControl sx={{
-          width : '90%',
-          margin : '10px auto',
-          display : 'flex',
-          justifyContent : 'center'}}>
-            <Opt>
-            <p fontWeight='bolder'>Option</p>
-              <OptCheck>
-                <FormControlLabel 
-                value={Parking} onChange={onParkingHandler}
-                control={<Checkbox />} label="주차장"
-                />
-                <FormControlLabel
-                value={Kitchen} onChange={onKitchenHandler}
-                control={<Checkbox />} label="취사"
-                />
-                <FormControlLabel
-                value={Wifi} onChange={onWifiHandler}
-                control={<Checkbox defaultChecked />} label="Wifi"
-                />
-                <FormControlLabel
-                value={Aircon} onChange={onAirconHandler}
-                control={<Checkbox />} label="에어컨"
-                />
-                <FormControlLabel 
-                value={Washer} onChange={onWasherHandler}
-                control={<Checkbox />} label="세탁기" 
-                />
-                <FormControlLabel 
-                value={TV} onChange={onTVHandler}
-                control={<Checkbox />} label="TV" 
-                />
-              </OptCheck>
-              {/* <DialogContentText fontSize={12}>
-              <PPP>입력하신 정보를 다시 한 번 확인해주세요.</PPP>
-              </DialogContentText> */}
-            </Opt>
+          </Opt2>
+          <Opt2>
+            <p>Price / day</p>
+              <TextField
+                autoFocus
+                margin="0 auto"
+                type="text"
+                variant="standard"
+                helperText="1박 가격"
+                value={Price}
+                onChange={onPriceHandler}
+              />
+          </Opt2>
           </FormControl>
-        </DialogContent>
-        <DialogActions>        
-          <Button onClick={handleClose}>취소</Button>
+          <Br/>
+          <FormControl sx={{
+          width : '100%',
+          display : 'flex',
+          margin : '0 auto',
+          flexDirection : 'row'}}>
+            <TextField 
+              fullWidth
+              helperText="숙소 이름"
+              label="Room Name"
+              id="RoomName"
+              value={RoomName}
+              onChange={onRoomNameHandler}>
+            </TextField>
+            <TextField 
+              fullWidth
+              helperText="ex) 서울특별시 용산구 이태원로 22, 2층"
+              label="Room Address"
+              id="RoomAddress"
+              value={RoomAddress}
+              onChange={onRoomAddressHandler}
+            />
+          </FormControl>
+          <Br/>
+          <Opt>
+            <p fontWeight='bolder'>Option</p>
+          </Opt>
+          <Opt3>
+              <FormControlLabel 
+              value={Parking} onChange={onParkingHandler}
+              control={<Checkbox />} label="주차장"
+              />
+              <FormControlLabel
+              value={Kitchen} onChange={onKitchenHandler}
+              control={<Checkbox />} label="실내취사"
+              />
+              <FormControlLabel
+              value={Wifi} onChange={onWifiHandler}
+              control={<Checkbox defaultChecked />} label="Wifi"
+              />
+              <FormControlLabel
+              value={Aircon} onChange={onAirconHandler}
+              control={<Checkbox />} label="에어컨"
+              />
+              <FormControlLabel 
+              value={Washer} onChange={onWasherHandler}
+              control={<Checkbox />} label="세탁기" 
+              />
+              <FormControlLabel 
+              value={TV} onChange={onTVHandler}
+              control={<Checkbox />} label="TV" 
+              />
+          </Opt3>
+          <Br/>
+          <Post>
+          <Button onClick={()=>{
+            navigate.push('/')
+          }}>취소</Button>
           <Button onClick={onSubmitHandler}>등록</Button>
-        </DialogActions>
-      </Dialog>
+          </Post>
+        </Wrap>
+      </HomeContainer>
     </>
-  );
+  )
 }
 
-export default BeHost
+export default HostPosting
+
+const HomeContainer = styled.div`
+    display:flex;
+    flex-wrap:wrap;
+    width:100%;
+    @media screen and (min-width:550px) {
+        gap:20px;
+    }
+
+    @media screen and (min-width:940px) {
+        gap:15px;
+    }
+
+    @media screen and (min-width:1125px) {
+        gap:13.3px;
+    }
+`
+
+const T = styled.div`
+margin-top : 5%;
+font-weight : bolder;
+font-size : 20px;
+padding-bottom : 0;
+`
 
 const P = styled.p`
-cursor : pointer;
+padding-left : 10px;
+padding-bottom : 5px;
 `
 
-const PP = styled.p`
-display : flex;
-align-items : center;
-justify-content : center;
-padding : 15px;
+const Wrap = styled.div`
+width : 95%;
+padding-left : 20px;
+`
+
+const Br = styled.div`
+padding : 5px 0;
+`
+
+const Hr = styled.hr`
+width : 860px;
+border : 0.1px solid lightgray;
+`
+
+const ST = styled.div`
+background-color : whitesmoke;
+padding : 5px;
 font-size : 15px;
-font-weight : bolder;
-
 `
+
+const XST = styled.div`
+padding : 5px 0;
+font-size : 12px;
+font-weight : normal;
+`
+
+const Span = styled.span`
+text-decoration : underline;
+: hover{
+    cursor : pointer;
+}
+`
+
 const Opt = styled.div`
 margin : 5px 0;
+font-size : 15px;
+font-weight : bolder;
+`
+
+const Opt2 = styled.div`
+width : 20%;
+margin : 5px 0;
+padding-right : 1%;
+font-size : 15px;
+font-weight : bolder;
+`
+
+const Opt3 = styled.div`
+width : 95%;
+display : flex;
+justify-content : space-between;
+margin : 5px 0;
+font-size : 15px;
+font-weight : bolder;
+`
+
+const Post = styled.div`
+display : flex;
+justify-content : flex-end;
+width : 100%;
+margin : 5px 0;
+font-size : 15px;
 font-weight : bolder;
 `
 
@@ -331,10 +387,3 @@ flex-direction : row;
 justify-content : center;
 align-items : center;
 `
-
-// const PPP = styled.p`
-// text-decoration : underline;
-// font-weight : bolder;
-// margin-top : 20px;
-// margin-bottom : 5px;
-// `

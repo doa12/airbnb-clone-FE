@@ -11,6 +11,9 @@ import Home from './pages/Home';
 // Book페이지를 보고 싶으면 아래의 주석을 풀고 이 문단의 첫 번째 코드를 주석처리하세요.
 // import Home from './pages/Book';
 
+// import Home from './pages/HostPosting'
+// 호스트페이지를 보고 싶으면 위의 주석을 풀어주세요.
+
 import MainHeader from './components/header/MainHeader';
 import SubHeader from './components/header/SubHeader';
 import theme from './style/theme';
@@ -29,7 +32,7 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
       </Routes> 
       </TestWish>  */}
-      {/* WishList 또는 Book을 보고 싶으면 위의 주석을 풀고 아래 문단의 코드를 주석처리하세요. */}
+      {/* WishList/Book/HostPosting을 보고 싶으면 위의 주석을 풀고 아래 문단의 코드를 주석처리하세요. */}
 
       <SubHeader setIsFilter={setIsFilter}/>
       {isFilter?<Filter setIsFilter={setIsFilter}/>:null}
@@ -55,7 +58,7 @@ const Content = styled.div`
   padding-top:85px;
 `
 
-// WishList를 보고 싶으면 아래의 주석을 풀고 위 문단의 코드를 주석처리하세요.
+// WishList/Book/HostPosting을 보고 싶으면 아래의 주석을 풀고 위 문단의 코드를 주석처리하세요.
 
 // const TestWish = styled.div`
 //   width:90%;

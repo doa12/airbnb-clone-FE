@@ -8,8 +8,6 @@ import { FaUserCircle } from 'react-icons/fa';
 import Signup from '../modal/Signup';
 import Login from '../modal/Login';
 import Logout from '../modal/Logout';
-import WishList from '../../pages/WishList'
-import HostPosting from '../../pages/HostPosting'
 import { userActions } from '../../redux/modules/userSlice';
 
 
@@ -68,7 +66,7 @@ const PersonalButtons = () => {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          <FaUserCircle fontSize={23}/>
+          <FaUserCircle fontSize={"23"}/>
         </Button>
         
         <Popper
@@ -102,15 +100,26 @@ const PersonalButtons = () => {
 
                     <MenuItem onClick={()=>{
                       navigate.push(
-                        '/api/mypage/wishlist?&page=0부터시작&size=20&sort=createdAt,DESC'
+                        '/WishList'
                         )
                       }}>위시리스트
                     </MenuItem>
-                    
 
-                    <MenuItem onClick={handleClose}>예약현황</MenuItem>
-                    <MenuItem onClick={logoutHandler}>로그아웃</MenuItem>
+                    <MenuItem onClick={()=>{
+                      navigate.push(
+                        '/Book'
+                        )
+                      }}>예약내역</MenuItem>
+                    <MenuItem onClick={()=>{
+                      navigate.push(
+                        '/HostPosting'
+                        )
+                      }}>숙소 등록하기</MenuItem>  
+                    <MenuItem><Logout/></MenuItem>
 
+
+                    {/* <MenuItem onClick={handleClose}>예약현황</MenuItem>
+                    <MenuItem onClick={logoutHandler}>로그아웃</MenuItem> */}
                     
                   </MenuList>
                 </ClickAwayListener>
