@@ -21,7 +21,7 @@ const initialState = {
 }
 export const fetchPostingDataFirst = createAsyncThunk('posting/fetchPostingDataFirst', async (_, { getState, dispatch }) => {
     const category = getState().posting.filtering.structType;
-    const res = await instance.get(`/api/rooms?category=${category}/page=0&size=20`);
+    const res = await instance.get(`/api/rooms?category=${category}/page=0&size=12`);
     const data = res.data;
     console.log(data);
 
@@ -30,7 +30,7 @@ export const fetchPostingDataFirst = createAsyncThunk('posting/fetchPostingDataF
 
 export const fetchPostingDataByScroll = createAsyncThunk('posting/fetchPostingDataByScroll', async ({ page }, { getState, dispatch }) => {
     const category = getState().posting.filtering.structType;
-    const res = await instance.get(`/api/rooms?category=${category}/page=${page}&size=20`);
+    const res = await instance.get(`/api/rooms?category=${category}/page=${page}&size=12`);
 
     const data = res.data;
     console.log(data);
@@ -42,7 +42,7 @@ export const fetchFilteringPostingDataFirst = createAsyncThunk('posting/fetchFil
     const category = getState().posting.filtering.structType;
     const { isParking, isKitchen, isWifi, isAircon, isWasher, isTV, minPrice, maxPrice } = getState().posting.filtering.options;
     const res =
-    await instance.get(`/api/rooms?category=${category}&parking=${isParking}&kitchen=${isKitchen}&aircon=${isAircon}&wifi=${isWifi}&washer=${isWasher}&tv=${isTV}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=0&size=20`);
+    await instance.get(`/api/rooms?category=${category}&parking=${isParking}&kitchen=${isKitchen}&aircon=${isAircon}&wifi=${isWifi}&washer=${isWasher}&tv=${isTV}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=0&size=12`);
     // 이 thunk가 사용되는 컴포넌트에서는 useselector로 filtering 값을 받아와 useEffect 의존성 배열에 넣고 바뀔때마다 데이터 갱신할 수 있도록 구현
     const data = res.data;
     console.log(data);
@@ -55,7 +55,7 @@ export const fetchFilteringPostingDataByScroll = createAsyncThunk('posting/fetch
     const category = getState().posting.filtering.structType;
     const { isParking, isKitchen, isWifi, isAircon, isWasher, isTV, minPrice, maxPrice } = getState().posting.filtering.options;
     const res =
-    await instance.get(`/api/rooms?category=${category}&parking=${isParking}&kitchen=${isKitchen}&aircon=${isAircon}&wifi=${isWifi}&washer=${isWasher}&tv=${isTV}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&size=20`);
+    await instance.get(`/api/rooms?category=${category}&parking=${isParking}&kitchen=${isKitchen}&aircon=${isAircon}&wifi=${isWifi}&washer=${isWasher}&tv=${isTV}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&size=12`);
     const data = res.data;
 
     console.log(data);

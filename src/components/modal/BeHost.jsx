@@ -8,24 +8,21 @@ DialogContent, DialogContentText,
 Box, Button, TextField, Checkbox, Slider,
 FormGroup, FormControl, FormControlLabel } from '@mui/material';
 import { MdSupervisedUserCircle } from 'react-icons/md';
+import instance from '../../shared/axios';
 
 
 function BeHost() {
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler =  async (event) => {
     event.preventDefault();
-    let body = {
-      host : Host
-    }
-    Host(body);
+    // const res = await instance.post(`/api/host/register`);
+    // const data = res.data;
+    // console.log(data);
+      alert('호스트가 되셨습니다.');
+      handleClose();
+    
+    
   }
-    const Host=async (body) => {
-        let data = {
-          host : body.Host
-        }
-        const res = await axios.post(`http://ip/api/host/register`, data);
-        window.alert('신청이 완료되었습니다!');
-        navigate.push('/');
-      }
+    
 // 이 위로가 새로 추가한 코드입니다.
   const navigate = useNavigate();
   // const dispatch = useDispatch();
@@ -41,16 +38,17 @@ function BeHost() {
   };
 
 
+
   return (
     <>
       <Wrap>
-      <MdSupervisedUserCircle fontSize={25}/>
+      <MdSupervisedUserCircle fontSize={"25"}/>
       <P onClick={handleOpen}>호스트 되기</P>
       </Wrap>
-      <Dialog fullWidth onSubmit={onSubmitHandler} open={open} onClose={handleClose}>
+      <Dialog  onSubmit={onSubmitHandler} open={open} onClose={handleClose}>
           <PP>호스트 신청</PP>
           <hr/>
-        <DialogTitle fontFamily={"Md"} fontSize={20} fontWeight={"bolder"}>
+        <DialogTitle fontFamily={"Md"} fontSize={"20"} fontWeight={"bold"}>
           호스트 유저로 전환하시겠습니까?
         </DialogTitle>
         <DialogContent>
@@ -60,7 +58,7 @@ function BeHost() {
         </DialogContent>
         <DialogActions>        
           <Button onClick={handleClose}>취소</Button>
-          <Button value={Host} onClick={onSubmitHandler}>신청</Button>
+          <Button onClick={onSubmitHandler}>신청</Button>
         </DialogActions>
       </Dialog>
     </>

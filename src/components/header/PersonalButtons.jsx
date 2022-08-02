@@ -99,19 +99,14 @@ const PersonalButtons = () => {
                   >
                     <MenuItem><Signup/></MenuItem>
                     <MenuItem><Login/></MenuItem>
+
                     <MenuItem onClick={()=>{
                       navigate.push(
                         '/api/mypage/wishlist?&page=0부터시작&size=20&sort=createdAt,DESC'
                         )
                       }}>위시리스트
                     </MenuItem>
-
-                    <MenuItem onClick={()=>{
-                      navigate.push(
-                        '/api/mypage/reservation?page=0부터시작&size=20&sort=createdAt,DESC'
-                        )
-                      }}>예약내역</MenuItem>
-                    <MenuItem><Logout/></MenuItem>
+                    
 
                     <MenuItem onClick={handleClose}>예약현황</MenuItem>
                     <MenuItem onClick={logoutHandler}>로그아웃</MenuItem>
