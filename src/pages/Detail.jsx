@@ -6,26 +6,25 @@ import moment from 'moment';
 const Detail = () => {
     const params = useParams(); // 포스팅 아이디로 데이터 꺼내오기
     const [date, setDate] = useState({
-        startDate:"",
-        endDate:""
+        checkIn:"",
+        checkOut:""
     });
     const [diffDays, setDiffDays] = useState(0);
     const dateChangeHandler = (e) => {
-        
         setDate({...date, [e.target.name]:e.target.value});
         console.log(date);
     }
 
     useEffect(() => {
         if(date.startDate && date.endDate) {
-            const date1 = moment(date.startDate);
-            const date2 = moment(date.endDate);
+            const date1 = moment(date.checkIn);
+            const date2 = moment(date.checkOut);
             date1.format();
             date2.format();
 
             const result = date2.diff(date1, "days");
             if(result <= 0) {
-                setDate({...date, endDate:""});
+                setDate({...date, checkOut:""});
                 return;
             }
 
@@ -55,9 +54,9 @@ const Detail = () => {
                     <DetailReservationBox>
                         <ReservationBoxPrice><p>$442,123</p><span>/ 박</span></ReservationBoxPrice>
                         <ReservationDataInputs>
-                        <input type='date' name="startDate" onChange={dateChangeHandler} value={date.startDate}></input>
+                        <input type='date' name="checkIn" onChange={dateChangeHandler} value={date.checkIn}></input>
                         <span>~</span>
-                        <input type='date' name="endDate" onChange={dateChangeHandler} value={date.endDate}></input>
+                        <input type='date' name="checkOut" onChange={dateChangeHandler} value={date.checkOut}></input>
                     </ReservationDataInputs>
                     <ReservationButton>예약하기</ReservationButton>
                     <ReservationDesc><p>예약 확정 전에는 요금이 청구되지 않습니다.</p></ReservationDesc>

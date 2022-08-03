@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Dialog, DialogTitle, DialogActions,
 DialogContent, DialogContentText, 
 Box, Button, TextField, Checkbox, Slider,
@@ -11,14 +11,19 @@ import { MdSupervisedUserCircle } from 'react-icons/md';
 import instance from '../../shared/axios';
 
 
+
 function BeHost() {
-  const onSubmitHandler =  async (event) => {
-    event.preventDefault();
-    // const res = await instance.post(`/api/host/register`);
-    // const data = res.data;
-    // console.log(data);
-      alert('호스트가 되셨습니다.');
-      handleClose();
+  const isHost = useSelector(state => state.user.userInfo.isHost);
+  const onSubmitHandler =  async () => {
+    const res = await instance.post(`/api/host/register`);
+    const data = res.data;
+    if(data.status === 200) {
+      alert(data.message);
+    }
+    else if(data.status === 500) {
+      alert(data.message);
+    }
+    handleClose();
     
     
   }
@@ -41,7 +46,7 @@ function BeHost() {
 
   return (
     <>
-      <Wrap>
+      <Wrap style={{display:isHost&&'none'}}>
       <MdSupervisedUserCircle fontSize={"25"}/>
       <P onClick={handleOpen}>호스트 되기</P>
       </Wrap>

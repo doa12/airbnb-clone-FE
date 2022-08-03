@@ -48,8 +48,7 @@ function Signup() {
 
     let body = {
       username: UserName,
-      password: Password,
-      passwordcheck: CheckPassword
+      password: Password
     };
 
     const res = await instance.post('/api/signup', body).catch((e) => {
@@ -58,7 +57,8 @@ function Signup() {
       return;
     })
     const data = res.data;
-    // if(data.status) {
+
+    // if(data.status === "500) {
     //   alert('회원가입 실패!');
     // return;
     // }

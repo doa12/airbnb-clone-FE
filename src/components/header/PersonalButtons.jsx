@@ -9,11 +9,14 @@ import Signup from '../modal/Signup';
 import Login from '../modal/Login';
 import Logout from '../modal/Logout';
 import { userActions } from '../../redux/modules/userSlice';
+import { useSelector } from 'react-redux';
 
 
 const PersonalButtons = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const username = useSelector(state=> state.user.userInfo.username);
+  const isHost = useSelector(state => state.user.userInfo.isHost);
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -95,31 +98,22 @@ const PersonalButtons = () => {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem><Signup/></MenuItem>
-                    <MenuItem><Login/></MenuItem>
+                    <MenuItem style={{display:username&&"none"}}><Signup/></MenuItem>
+                    <MenuItem style={{display:username&&"none"}}><Login/></MenuItem>
 
-                    <MenuItem onClick={()=>{
-                      navigate.push(
-                        '/WishList'
-                        )
+                    <MenuItem style={{display:username||"none"}} onClick={()=>{
+                      navigate('/wishList');
                       }}>위시리스트
                     </MenuItem>
 
-                    <MenuItem onClick={()=>{
-                      navigate.push(
-                        '/Book'
-                        )
+                    <MenuItem style={{display:username||"none"}} onClick={()=>{
+                      navigate('/book');
                       }}>예약내역</MenuItem>
-                    <MenuItem onClick={()=>{
-                      navigate.push(
-                        '/HostPosting'
-                        )
+                      
+                    <MenuItem style={{display:isHost||"none"}} onClick={()=>{
+                      navigate('/hostPosting');
                       }}>숙소 등록하기</MenuItem>  
-                    <MenuItem><Logout/></MenuItem>
-
-
-                    {/* <MenuItem onClick={handleClose}>예약현황</MenuItem>
-                    <MenuItem onClick={logoutHandler}>로그아웃</MenuItem> */}
+                    <MenuItem style={{display:username||"none"}}><Logout/></MenuItem>
                     
                   </MenuList>
                 </ClickAwayListener>

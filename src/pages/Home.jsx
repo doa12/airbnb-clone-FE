@@ -15,16 +15,18 @@ const Home = () => {
 
     useEffect(() => {
         if(!isFiltering) {
-            // dispatch(postingActions.setDefaultPostings());
             dispatch(fetchPostingDataFirst());
         }
         else if(isFiltering) {
-            // dispatch(postingActions.setDefaultPostings());
             dispatch(fetchFilteringPostingDataFirst())
         }
 
         return(()=> {
-            dispatch(postingActions.setDefaultPostings());
+            // 의존성 배열에 있는 데이터가 바뀌면 Home컴포넌트 언마운트.
+            // 카테고리가 바뀔 때,
+            // 필터링 기능을 켰을 때
+            // 필터링 기능이 켜져 있는 상태에서 필터링 기준(option)을 바꿀 때
+            dispatch(postingActions.setDefaultPostings()); // postings를 비워줌
         })
         
     }, [isFiltering, category, options])

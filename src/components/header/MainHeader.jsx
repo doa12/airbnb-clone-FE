@@ -23,12 +23,12 @@ const MainHeader = () => {
                     <HeaderInputButton>
                         <FaSearch/>
                     </HeaderInputButton>
-                        <HeaderInput placeholder='지역으로 검색하세요!'>
+                        <HeaderInput placeholder='숙소 이름으로 검색하세요!'>
 
                         </HeaderInput>
                     </HeaderSearchArea>
                     <HeaderActionsArea>
-                        <BeHost />
+                        <BeHost/>
                         <PersonalButtons/>
                     </HeaderActionsArea>
                     

@@ -90,7 +90,7 @@ color : black;
 
 const Span = styled.span`
 text-decoration : underline;
-: hover{
+:hover{
     cursor : pointer;
 }
 `
