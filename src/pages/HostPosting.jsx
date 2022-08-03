@@ -10,6 +10,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import Header from '../components/header/MainHeader'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import instance from '../shared/axios';
 
 
 
@@ -73,7 +74,7 @@ function HostPosting() {
     console.log(otherDatas);
   }
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = async () => {
     let new_data;
     let resultOptions = [];
     const keys = Object.keys(options);
@@ -84,16 +85,23 @@ function HostPosting() {
     new_data = {
       imgUrl:image,
       title:otherDatas.title,
-      maxGuest:otherDatas.maxGuest,
-      price:otherDatas.price,
+      maxGuest:Number(otherDatas.maxGuest),
+      price:Number(otherDatas.price),
       information:otherDatas.information,
       location:otherDatas.location,
       option:resultOptions,
       category:category
     }
 
-    console.log(new_data)
-    navigate('/');
+    console.log(new_data);
+    const res = await instance.post('/api/host/room', new_data).catch((e) => alert('error'));
+    const data = res.data;
+    if(data.status === 200) {
+      navigate('/');
+      
+    }
+    alert(data.message);
+    
 
   }
    

@@ -4,19 +4,22 @@ import { Card, CardActions, CardContent, CardMedia,
   Button, Typography
 } from '@mui/material';
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
-import { useSelector } from 'react-redux'; 
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import instance from '../../shared/axios';
 
 
 const PostingCard = ({ item, idx, setPage, length }) => {
+    // const isLast = useSelector(state=>state.posting.isLast);
     const [target, setTarget] = useState(null);
     // 추후 함수형 초기화로 데이터를 받아와서 false true값 설정
-    const [wish, setWish] = useState(false);
+    const [wish, setWish] = useState(()=> {
+      if(item.isWish) return true;
+      else if(!item.isWish) return false;
+    });
+    const navigate = useNavigate();
 
     const onIntersect = ([entry], observer) => {
-      // if(isLast가 true면 disconnect하기, return하기)
-      // if(isLast && observer) {
-      //   observer.disconnect();
-      // }
       if(entry.isIntersecting) {
         //page 올리는 로직
         observer.unobserve(entry.target);
@@ -24,10 +27,25 @@ const PostingCard = ({ item, idx, setPage, length }) => {
       }
     }
 
+  const onClickPostingCard = () => {
+    navigate(`/detail/${item.roomId}`);
+  }
+
+  const onClickWishButton = async () => {
+    if(!wish) {
+      await instance.post(`/api/wishlist/${item.roomId}`).catch((e) => alert('error'));
+      setWish((wish) => (!wish));
+    }
+    else {
+      await instance.delete(`/api/wishlist/${item.roomId}`).catch((e) => alert('eroor'));
+      setWish((wish) => (!wish));
+    }
+  }
+
     useEffect(()=> {
       let observer;
       if(target) {
-        observer = new IntersectionObserver(onIntersect, {threshold:0.3});
+        observer = new IntersectionObserver(onIntersect, {threshold:0.8});
         observer.observe(target);
       }
 
@@ -36,11 +54,15 @@ const PostingCard = ({ item, idx, setPage, length }) => {
       })
     }, [target])
 
+
     return (
-        <CardWrapper ref={idx == length - 1 ? setTarget : null}>
-            <p className='wish-icon' onClick={()=>setWish((wish) => (!wish))}>
+        <CardWrapper ref={idx == length - 1 ? setTarget : null} >
+            <WishIconArea>
+            <p className='wish-icon' onClick={onClickWishButton}>
               {!wish?<BsSuitHeart color='#ff415e'/>:<BsSuitHeartFill color='#ff415e'/>}</p>
-        <Card sx={{ maxWidth: "100%", border:"none"}}>
+            </WishIconArea>
+            
+        <Card sx={{ maxWidth: "100%", border:"none"}} onClick={onClickPostingCard}>
           <CardMedia
             component="img"
             height="350"
@@ -74,6 +96,7 @@ const CardWrapper = styled.div`
     position: relative;
     user-select:none;
     border:none;
+    background:gray;
 
     @media screen and (min-width:550px) {
         width:calc(100% / 2 - 10px);
@@ -91,4 +114,11 @@ const CardWrapper = styled.div`
         top:10px;
         right:20px;
     }
+`
+
+const WishIconArea = styled.div`
+  width:100%;
+  position:relative;
+  background:blue;
+  z-index:1;
 `
