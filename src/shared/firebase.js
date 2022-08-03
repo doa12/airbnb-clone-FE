@@ -12,16 +12,6 @@ const firebaseConfig = {
     measurementId: `${process.env.REACT_APP_FS_MEASUREMENT_ID}`
 };
 
-// const firebaseConfig = {
-//     apiKey: "AIzaSyA4J11bPbPLqduJXsKPsH342bde1Y9Fn2Q",
-//     authDomain: "airbnb-clone-99a17.firebaseapp.com",
-//     projectId: "airbnb-clone-99a17",
-//     storageBucket: "airbnb-clone-99a17.appspot.com",
-//     messagingSenderId: "696178664806",
-//     appId: "1:696178664806:web:d2cf2dcd48e9bc317494a7",
-//     measurementId: "G-VCE08C7HSN"
-//   };
-
 const app = initializeApp(firebaseConfig);
 
 

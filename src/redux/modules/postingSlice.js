@@ -114,21 +114,21 @@ const postingSlice = createSlice({
     extraReducers: {
         [fetchPostingDataFirst.fulfilled.type]: (state, action) => {
             state.postings = action.payload.content;
-            state.isLast = action.payload.isLast;
+            state.isLast = action.payload.last;
             // state.filtering.isFiltering = false;
         },
         [fetchPostingDataByScroll.fulfilled.type]: (state, action) => {
             state.postings = [...state.postings, ...action.payload.content];
-            state.isLast = action.payload.isLast;
+            state.isLast = action.payload.last;
             // state.filtering.isFiltering = false;
         },
         [fetchFilteringPostingDataFirst.fulfilled.type]: (state, action) => {
             state.postings = action.payload.content;
-            state.isLast = action.payload.isLast;
+            state.isLast = action.payload.last;
         },
         [fetchFilteringPostingDataByScroll.fulfilled.type]:(state, action) => {
             state.postings = [...state.postings, ...action.payload.content];
-            state.isLast = action.payload.isLast;
+            state.isLast = action.payload.last;
             // state.filtering.isFiltering = true;
         }
     }

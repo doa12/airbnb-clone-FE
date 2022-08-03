@@ -1,16 +1,43 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { Card, CardActions, CardContent, CardMedia,
   Button, Typography
 } from '@mui/material';
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
+import { useSelector } from 'react-redux'; 
 
 
-const PostingCard = ({ item, idx }) => {
+const PostingCard = ({ item, idx, setPage, length }) => {
+    const [target, setTarget] = useState(null);
     // 추후 함수형 초기화로 데이터를 받아와서 false true값 설정
     const [wish, setWish] = useState(false);
+
+    const onIntersect = ([entry], observer) => {
+      // if(isLast가 true면 disconnect하기, return하기)
+      // if(isLast && observer) {
+      //   observer.disconnect();
+      // }
+      if(entry.isIntersecting) {
+        //page 올리는 로직
+        observer.unobserve(entry.target);
+        setPage((page) => page + 1);
+      }
+    }
+
+    useEffect(()=> {
+      let observer;
+      if(target) {
+        observer = new IntersectionObserver(onIntersect, {threshold:0.3});
+        observer.observe(target);
+      }
+
+      return(()=> {
+        observer && observer.disconnect();
+      })
+    }, [target])
+
     return (
-        <CardWrapper>
+        <CardWrapper ref={idx == length - 1 ? setTarget : null}>
             <p className='wish-icon' onClick={()=>setWish((wish) => (!wish))}>
               {!wish?<BsSuitHeart color='#ff415e'/>:<BsSuitHeartFill color='#ff415e'/>}</p>
         <Card sx={{ maxWidth: "100%", border:"none"}}>
