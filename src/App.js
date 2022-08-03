@@ -6,6 +6,9 @@ import styled, { ThemeProvider} from 'styled-components';
 import GlobalStyle from './style/GlobalStyle';
 
 import Home from './pages/Home';
+import WishList from './pages/WishList';
+import HostPosting from './pages/HostPosting';
+import Book from './pages/Book';
 // import Home from './pages/WishList';
 // WishList를 보고 싶으면 위의 주석을 풀고 이 문단의 첫 번째 코드를 주석처리하세요.
 // Book페이지를 보고 싶으면 아래의 주석을 풀고 이 문단의 첫 번째 코드를 주석처리하세요.
@@ -40,6 +43,9 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/detail/:id' element={<Detail/>}></Route>
+          <Route path='/wishList' element={<WishList></WishList>}/>
+          <Route path='/hostPosting' element={<HostPosting></HostPosting>}/>
+          <Route path='/book' element={<Book></Book>}/>
         </Routes>
       </Content>
 

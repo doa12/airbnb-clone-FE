@@ -34,31 +34,23 @@ function Login() {
     setPassword(event.currentTarget.value);
   };
 
-  const onSubmitHandler =  async (event) => {
-    event.preventDefault();
-
-    console.log("UserName", UserName);
-    console.log("Password", Password);
-
+  const onSubmitHandler =  async () => {
     let body = {
       username: UserName,
       password: Password,
     };
 
-    // Login(body);
-    const res = await instance.post('/api/login', body).catch((e) => {
-      console.log(e);
-      alert("로그인 요청 실패!");
+    await instance.post('/api/login', body).catch((e) => {
+      alert('로그인 요청 실패');
     });
+  
+    localStorage.setItem('Authorization', res.headers.authorization);
+    const res = await instance.post('/api/info').catch((e) => {
+      alert('유저 정보 가져오기 실패');
+    })
     const data = res.data;
-    
-    // if(data.status === false) {
-          // alert('로그인 실패!!');
-          // return;
-    // }
-    dispatch(userActions.setUserInfo(UserName));
-    localStorage.setItem('Authorization', res.headers.Authorization);
-    alert(data.message);
+    dispatch(userActions.setUserInfo({username:data.username, isHost:data.host}));
+    alert('로그인 성공');
 
     handleClose();
 
