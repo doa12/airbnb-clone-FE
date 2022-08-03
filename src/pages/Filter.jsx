@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import { postingActions } from '../redux/modules/postingSlice';
 import { useDispatch } from 'react-redux';
 
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
 const Filter = ({ setIsFilter }) => {
     const dispatch = useDispatch();
 
@@ -50,6 +54,7 @@ const Filter = ({ setIsFilter }) => {
 
     const priceChangeHandler = (e) => {
         setData({...data, [e.target.name]:e.target.value});
+        
     }
 
     const resetFiltering = () => {
@@ -79,8 +84,7 @@ const Filter = ({ setIsFilter }) => {
                     </div>
                     <div className='controller-wrap'>
                         <h2>편의시설</h2>
-                        {/* <div className='price-controller'> */}
-                        <div>
+                        {/* <div>
                             <label htmlFor="isParking">주차장</label>
                             <input type="checkbox" id="isParking" name="isParking" value="true" onClick={checkBoxClickHandler}/>
                         </div>
@@ -103,9 +107,17 @@ const Filter = ({ setIsFilter }) => {
                         <div>
                             <label htmlFor="isTV">TV</label>
                             <input type="checkbox" id="isTV" name="isTV" value="true" onClick={checkBoxClickHandler}/>
-                        </div>
-                        {/* </div> */}
+                        </div> */}
+                         <FormGroup>
+                            <FormControlLabel name="isParking" onClick={checkBoxClickHandler} control={<Checkbox/>} label="주차장" />
+                            <FormControlLabel name="isKitchen" onClick={checkBoxClickHandler} control={<Checkbox />} label="실내취사" />
+                            <FormControlLabel name="isWifi" onClick={checkBoxClickHandler} control={<Checkbox />} label="무선인터넷" />
+                            <FormControlLabel name="isAircon" onClick={checkBoxClickHandler} control={<Checkbox />} label="에어컨" />
+                            <FormControlLabel name="isWasher" onClick={checkBoxClickHandler} control={<Checkbox />} label="세탁기" />
+                            <FormControlLabel name="isTV" onClick={checkBoxClickHandler} control={<Checkbox />} label="TV" />
+                        </FormGroup>
                     </div>
+                   
                     
                 </FilterController>
                 <FilterFooter>
