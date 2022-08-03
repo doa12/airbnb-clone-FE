@@ -47,11 +47,12 @@ const Home = () => {
 
     return(
         <HomeContainer>
+            {postings.map((posting, index) => <PostingCard key={posting.roomId}item={posting} idx={index}/>)}
+            {/* <PostingCard></PostingCard>
             <PostingCard></PostingCard>
             <PostingCard></PostingCard>
             <PostingCard></PostingCard>
-            <PostingCard></PostingCard>
-            <PostingCard></PostingCard>
+            <PostingCard></PostingCard> */}
         </HomeContainer>
     )
 }

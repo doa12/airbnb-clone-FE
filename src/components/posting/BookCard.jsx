@@ -5,7 +5,7 @@ import { Card, CardActions, CardContent, CardMedia,
 } from '@mui/material';
 import { BsFillStarFill } from 'react-icons/bs';
 
-const PostingCard = () => {
+const BookCard = () => {
     // 추후 함수형 초기화로 데이터를 받아와서 false true값 설정
     return (
       <>
@@ -50,7 +50,7 @@ const PostingCard = () => {
       );
 }
 
-export default PostingCard;
+export default BookCard;
 
 const CardWrapper = styled.div`
     width:100%;
