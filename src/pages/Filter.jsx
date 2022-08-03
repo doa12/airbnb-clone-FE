@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { postingActions } from '../redux/modules/postingSlice';
+import { useDispatch } from 'react-redux';
 
 const Filter = ({ setIsFilter }) => {
+    const dispatch = useDispatch();
 
     const [data, setData] = useState({
         isParking:"false",
@@ -49,6 +52,18 @@ const Filter = ({ setIsFilter }) => {
         setData({...data, [e.target.name]:e.target.value});
     }
 
+    const resetFiltering = () => {
+        dispatch(postingActions.setFalseIsFiltering());
+        dispatch(postingActions.closeFiltering());
+        setIsFilter(false);
+    }
+
+    const showFilteredData = () => {
+        dispatch(postingActions.openFiltering(data)); // 어떤 것을 기준으로 필터링 할 것인지 리덕스에 넘겨줌
+        dispatch(postingActions.setTrueIsFiltering()); // 리덕스의 isFiltering을 바꿔줌으로써 Home 컴포넌트 useEffect 실행
+        setIsFilter(false);
+    }
+
     return(
         <FilterWrapper className='filter-wrapper' onClick={ClickHandler}>
             <FilterContent>
@@ -70,7 +85,7 @@ const Filter = ({ setIsFilter }) => {
                             <input type="checkbox" id="isParking" name="isParking" value="true" onClick={checkBoxClickHandler}/>
                         </div>
                         <div>
-                            <label htmlFor="isKitchen">부엌/취사</label>
+                            <label htmlFor="isKitchen">실내취사</label>
                             <input type="checkbox" id="isKitchen" name="isKitchen" value="true" onClick={checkBoxClickHandler}/>
                         </div>
                         <div>
@@ -94,8 +109,8 @@ const Filter = ({ setIsFilter }) => {
                     
                 </FilterController>
                 <FilterFooter>
-                    <p>필터초기화</p>
-                    <button>표시</button>
+                    <p onClick={resetFiltering}>필터초기화</p>
+                    <button onClick={showFilteredData}>표시</button>
                 </FilterFooter>
             </FilterContent>
         </FilterWrapper>
