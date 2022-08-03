@@ -21,7 +21,7 @@ const initialState = {
 }
 export const fetchPostingDataFirst = createAsyncThunk('posting/fetchPostingDataFirst', async (_, { getState, dispatch }) => {
     const category = getState().posting.filtering.structType;
-    const res = await instance.get(`/api/rooms?category=${category}/page=0&size=12`);
+    const res = await instance.get(`/api/rooms?category=${category}&page=0&size=12`);
     const data = res.data;
     console.log(data);
 
@@ -30,7 +30,7 @@ export const fetchPostingDataFirst = createAsyncThunk('posting/fetchPostingDataF
 
 export const fetchPostingDataByScroll = createAsyncThunk('posting/fetchPostingDataByScroll', async ({ page }, { getState, dispatch }) => {
     const category = getState().posting.filtering.structType;
-    const res = await instance.get(`/api/rooms?category=${category}/page=${page}&size=12`);
+    const res = await instance.get(`/api/rooms?category=${category}&page=${page}&size=12`);
 
     const data = res.data;
     console.log(data);
@@ -80,10 +80,14 @@ const postingSlice = createSlice({
         setTrueIsFiltering:(state) => {
             state.filtering.isFiltering = true;
         },
+        setFalseIsFiltering:(state) => {
+            state.filtering.isFiltering = false;
+        },
         closeFiltering:(state) => {
             // 필터링 기능 끄기
+            state.filtering.isFiltering = false;
             const defaultFiltering = {
-                structType:"all",
+                structType:state.filtering.structType,
                 isFiltering:false,
                 options:{
                     isParking:false,
@@ -97,7 +101,11 @@ const postingSlice = createSlice({
                 }
             }
             state.filtering = defaultFiltering;
-            state.filtering.isFiltering = false;
+        },
+        openFiltering:(state, action) => {
+            // 필터링기능 켜기
+            // 클라이언트에서 고른 필터링 기준을 리덕스에 반영
+            state.filtering.options = action.payload;
         },
         setDefaultCategory: (state) => {
             state.filtering.category = "all";
@@ -107,22 +115,21 @@ const postingSlice = createSlice({
         [fetchPostingDataFirst.fulfilled.type]: (state, action) => {
             state.postings = action.payload.content;
             state.isLast = action.payload.isLast;
-            state.filtering.isFiltering = false;
+            // state.filtering.isFiltering = false;
         },
         [fetchPostingDataByScroll.fulfilled.type]: (state, action) => {
             state.postings = [...state.postings, ...action.payload.content];
             state.isLast = action.payload.isLast;
-            state.filtering.isFiltering = false;
+            // state.filtering.isFiltering = false;
         },
         [fetchFilteringPostingDataFirst.fulfilled.type]: (state, action) => {
             state.postings = action.payload.content;
             state.isLast = action.payload.isLast;
-            state.filtering.isFiltering = true;
         },
         [fetchFilteringPostingDataByScroll.fulfilled.type]:(state, action) => {
             state.postings = [...state.postings, ...action.payload.content];
             state.isLast = action.payload.isLast;
-            state.filtering.isFiltering = true;
+            // state.filtering.isFiltering = true;
         }
     }
 })
