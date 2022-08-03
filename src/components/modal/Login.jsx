@@ -40,11 +40,12 @@ function Login() {
       password: Password,
     };
 
-    await instance.post('/api/login', body).catch((e) => {
+    const loginRes = await instance.post('/api/login', body).catch((e) => {
       alert('로그인 요청 실패');
     });
+    
   
-    localStorage.setItem('Authorization', res.headers.authorization);
+    localStorage.setItem('Authorization', loginRes.headers.authorization);
     const res = await instance.post('/api/info').catch((e) => {
       alert('유저 정보 가져오기 실패');
     })
