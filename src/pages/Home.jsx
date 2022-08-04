@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { postingActions, fetchPostingDataFirst, fetchFilteringPostingDataFirst, fetchPostingDataByScroll, fetchFilteringPostingDataByScroll } from '../redux/modules/postingSlice';
 import PostingCard from '../components/posting/PostingCard';
+import NoData from '../components/posting/NoData';
 
 
 const Home = () => {
@@ -28,6 +29,7 @@ const Home = () => {
             // 필터링 기능이 켜져 있는 상태에서 필터링 기준(option)을 바꿀 때
             dispatch(postingActions.setDefaultPostings()); // postings를 비워줌
             setPage(0); // page값을 초기화 해야 다른 포스팅을 보여줄 때 무한스크롤이 적용됨.
+            window.scrollTo(0,0);
         })
         
     }, [isFiltering, category, options])
@@ -45,8 +47,10 @@ const Home = () => {
         }
     }, [page])
 
+
     return(
         <HomeContainer>
+            {!postings.length?<NoData/>:null}
             {postings.map((posting, index) => <PostingCard key={posting.roomId} item={posting} idx={index} setPage={setPage} length={postings.length}/>)}
         </HomeContainer>
     )

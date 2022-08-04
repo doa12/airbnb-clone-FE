@@ -103,15 +103,18 @@ const PersonalButtons = () => {
 
                     <MenuItem style={{display:username||"none"}} onClick={()=>{
                       navigate('/wishList');
+                      handleToggle();
                       }}>위시리스트
                     </MenuItem>
 
                     <MenuItem style={{display:username||"none"}} onClick={()=>{
                       navigate('/book');
+                      handleToggle();
                       }}>예약내역</MenuItem>
                       
                     <MenuItem style={{display:isHost||"none"}} onClick={()=>{
                       navigate('/hostPosting');
+                      handleToggle();
                       }}>숙소 등록하기</MenuItem>  
                     <MenuItem style={{display:username||"none"}}><Logout/></MenuItem>
                     

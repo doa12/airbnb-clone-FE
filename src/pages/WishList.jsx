@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Header from '../components/header/MainHeader'
+import NoData from '../components/posting/NoData';
 import WishCard from '../components/posting/WishCard';
+import instance from '../shared/axios';
+// 2022-12-11T10:00:00
 
 const WishList = () => {
+    const [datas, setDatas] = useState([]);
+    useEffect(() => {
+        const fetchWishData = async () => {
+            const res = await instance.get('/api/mypage/wishlist?page=0&size=20');
+            const data = res.data;
+            setDatas(data.content);
+        }
+
+        fetchWishData().catch(console.error);
+    }, [])
 
     return(
         <>
-            <Header/>
+            {/* <Header/> */}
             <HomeContainer>
-                <T><p>위시리스트</p><Tag>날짜</Tag><Tag>인원</Tag></T>
-                <WishCard />
-                <WishCard />
-                <WishCard />
+                {!datas.length?<NoData/>:null}
+                {datas.map((item, index) => <WishCard key={item.roomId} item={item}/>)}
             </HomeContainer>
         </>
     )
@@ -35,18 +46,4 @@ const HomeContainer = styled.div`
     @media screen and (min-width:1125px) {
         gap:13.3px;
     }
-`
-
-const T = styled.div`
-font-weight : bolder;
-font-size : 20px;
-`
-
-const Tag = styled.button`
-border : 2px solid #f7f7f7;
-border-radius : 30px;
-background-color : white;
-font-size : 12px;
-padding : 7px 15px;
-margin-top : 5px;
 `

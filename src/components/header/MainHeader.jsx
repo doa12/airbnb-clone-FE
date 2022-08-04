@@ -4,10 +4,12 @@ import { FaSearch } from 'react-icons/fa';
 import PersonalButtons from './PersonalButtons';
 import BeHost from '../modal/BeHost';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const MainHeader = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const username = useSelector(state => state.user.userInfo.username);
 
     const onClicklogo = () => {
         if(location.pathname === '/') {
@@ -44,7 +46,7 @@ const MainHeader = () => {
                         </HeaderInput>
                     </HeaderSearchArea>
                     <HeaderActionsArea>
-                        <BeHost/>
+                        {username?<BeHost/>:null}
                         <PersonalButtons/>
                     </HeaderActionsArea>
                     

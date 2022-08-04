@@ -10,7 +10,7 @@ import instance from '../../shared/axios';
 
 
 const PostingCard = ({ item, idx, setPage, length }) => {
-    // const isLast = useSelector(state=>state.posting.isLast);
+    const username = useSelector(state=>state.user.userInfo.username);
     const [target, setTarget] = useState(null);
     // 추후 함수형 초기화로 데이터를 받아와서 false true값 설정
     const [wish, setWish] = useState(()=> {
@@ -32,6 +32,10 @@ const PostingCard = ({ item, idx, setPage, length }) => {
   }
 
   const onClickWishButton = async () => {
+    if(!username) {
+      alert('로그인 후 이용해주세요!');
+      return;
+    }
     if(!wish) {
       await instance.post(`/api/wishlist/${item.roomId}`).catch((e) => alert('error'));
       setWish((wish) => (!wish));
@@ -96,7 +100,6 @@ const CardWrapper = styled.div`
     position: relative;
     user-select:none;
     border:none;
-    background:gray;
 
     @media screen and (min-width:550px) {
         width:calc(100% / 2 - 10px);

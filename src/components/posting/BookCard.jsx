@@ -1,12 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { Card, CardActions, CardContent, CardMedia,
   Box, Button, Typography
 } from '@mui/material';
 import { BsFillStarFill } from 'react-icons/bs';
 
-const BookCard = () => {
+const sliceString = (str) => {
+  return str.slice(0, 10);
+}
+
+const BookCard = ({item}) => {
     // 추후 함수형 초기화로 데이터를 받아와서 false true값 설정
+    
+    
     return (
       <>
         <CardWrapper>
@@ -18,28 +24,30 @@ const BookCard = () => {
           <CardMedia
             component="img"
             height="200"
-            image="https://stickher.kr/web/product/tiny/202202/bc21580bc8f761f08822b127cdd3a221.jpg"
+            image={`${item.imgUrl}`}
             sx={{borderRadius:"10px"}}
           >
           </CardMedia>
           </Box>
           <Box width='67%'>
           <CardContent sx={{border:'none', marginLeft:'10px'}}>
-          <Typography fontSize={12} gutterBottom variant="p" component="div" sx={{color:"gray", fontWeight:"bold"}}>
-              22-08-02 이용완료
-            </Typography>
+          
               
-            <Typography gutterBottom variant="h6" component="div" sx={{color:"gray", fontWeight:"bold", textDecoration:"line-through"}}>
-              하동월영재, 올모스트홈
+            <Typography gutterBottom variant="h6" component="div" sx={{color:"black", fontWeight:"bold"}}>
+              {`${item.title}, ${item.location}`}
+            </Typography>
+            <Typography fontSize={12} gutterBottom variant="p" component="div" sx={{color:"gray", fontWeight:"bold"}}>
+              <p>{`체크인 : ${sliceString(item.checkIn)}`}</p>
+              <p>{`체크아웃 : ${sliceString(item.checkOut)}`}</p>
             </Typography>
             <Br/>
             <Price>
-            <BsFillStarFill color='#ff415e'/><Span></Span>4.9
+            <p>{`이용 인원 : ${item.guestNum}명`}</p>
             </Price>
             <Br/>
             <Price>
             <Typography fontSize={15} gutterBottom variant="h7" component="div" sx={{fontWeight:"bold"}}>
-              이용완료된 숙소입니다.
+              {`결제 금액 : ￦${item.totalPrice}`}
             </Typography>
             </Price>
           </CardContent>

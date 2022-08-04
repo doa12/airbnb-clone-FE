@@ -11,6 +11,7 @@ import Header from '../components/header/MainHeader'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import instance from '../shared/axios';
+import {AiFillCheckCircle} from 'react-icons/ai';
 
 
 
@@ -75,6 +76,17 @@ function HostPosting() {
   }
 
   const onSubmitHandler = async () => {
+    if(!image.length || !category) {
+      alert('이미지, 입력 폼을 모두 완성해주세요');
+      return;
+    }
+    let otherDataValidation = Object.values(otherDatas);
+    for(let i of otherDataValidation) {
+      if(!i) {
+        alert('이미지, 입력 폼을 모두 완성해주세요');
+        return;
+      }
+    }
     let new_data;
     let resultOptions = [];
     const keys = Object.keys(options);
@@ -127,6 +139,7 @@ function HostPosting() {
             <input hidden accept="image/*" type="file" multiple onChange={onChangeImage}/>
             <PhotoCamera />
           </IconButton>
+          {image.length?<p style={{color:'green', fontSize:"20px"}}><AiFillCheckCircle/></p>:null}
           </P>
         </ST>
       </T>
@@ -276,6 +289,8 @@ padding-bottom : 0;
 `
 
 const P = styled.p`
+display:flex;
+align-items:center;
 padding-left : 10px;
 padding-bottom : 5px;
 `

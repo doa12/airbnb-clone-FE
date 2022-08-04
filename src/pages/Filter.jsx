@@ -84,30 +84,6 @@ const Filter = ({ setIsFilter }) => {
                     </div>
                     <div className='controller-wrap'>
                         <h2>편의시설</h2>
-                        {/* <div>
-                            <label htmlFor="isParking">주차장</label>
-                            <input type="checkbox" id="isParking" name="isParking" value="true" onClick={checkBoxClickHandler}/>
-                        </div>
-                        <div>
-                            <label htmlFor="isKitchen">실내취사</label>
-                            <input type="checkbox" id="isKitchen" name="isKitchen" value="true" onClick={checkBoxClickHandler}/>
-                        </div>
-                        <div>
-                            <label htmlFor="isWifi">무선인터넷</label>
-                            <input type="checkbox" id="isWifi" name="isWifi" value="true" onClick={checkBoxClickHandler}/>
-                        </div>
-                        <div>
-                            <label htmlFor="isAircon">에어컨</label>
-                            <input type="checkbox" id="isAircon" name="isAircon" value="true" onClick={checkBoxClickHandler}/>
-                        </div>
-                        <div>
-                            <label htmlFor="isWasher">세탁기</label>
-                            <input type="checkbox" id="isWasher" name="isWasher" value="true" onClick={checkBoxClickHandler}/>
-                        </div>
-                        <div>
-                            <label htmlFor="isTV">TV</label>
-                            <input type="checkbox" id="isTV" name="isTV" value="true" onClick={checkBoxClickHandler}/>
-                        </div> */}
                          <FormGroup>
                             <FormControlLabel name="isParking" onClick={checkBoxClickHandler} control={<Checkbox/>} label="주차장" />
                             <FormControlLabel name="isKitchen" onClick={checkBoxClickHandler} control={<Checkbox />} label="실내취사" />
@@ -176,6 +152,7 @@ const FilterController = styled.div`
 
     .controller-wrap, .price-wrap {
         padding-bottom:20px;
+        overflow: auto;
         h2 {
             margin-bottom:20px;
         }
@@ -192,6 +169,7 @@ const FilterController = styled.div`
     }
     .price-wrap {
         border-bottom:1px solid lightgray;
+        overflow:hidden;
     }
 `
 const FilterFooter = styled.div`

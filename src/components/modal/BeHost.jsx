@@ -24,6 +24,7 @@ function BeHost() {
       alert(data.message);
     }
     handleClose();
+    window.location.reload();
     
     
   }

@@ -41,7 +41,7 @@ function Login() {
     };
 
     const loginRes = await instance.post('/api/login', body).catch((e) => {
-      alert('로그인 요청 실패');
+      alert('로그인에 실패하였습니다.');
     });
     
   
@@ -54,6 +54,7 @@ function Login() {
     alert('로그인 성공');
 
     handleClose();
+    window.location.replace('/');
 
   };
 
